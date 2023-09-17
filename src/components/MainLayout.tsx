@@ -1,42 +1,29 @@
 import { Layout } from "antd";
-import { Link, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 
 const { Header, Footer, Content } = Layout;
-
-const styles = {
-  headerStyle: {
-    textAlign: "center",
-    color: "#fff",
-    height: 64,
-    paddingInline: 50,
-    lineHeight: "64px",
-    backgroundColor: "#7dbcea",
-  },
-  contentStyle: {
-    textAlign: "center",
-    minHeight: 120,
-    lineHeight: "120px",
-    color: "#fff",
-    backgroundColor: "#108ee9",
-  },
-  footerStyle: {
-    textAlign: "center",
-    color: "#fff",
-    backgroundColor: "#7dbcea",
-  },
-} satisfies Record<string, React.CSSProperties>;
 
 const MainLayout = () => {
   return (
     <div className="main-layout">
-      <Header style={styles.headerStyle}>
-        <Link to="/">Welcome</Link>
-        <Link to="/auth">Auth</Link>
+      <Header className="header">
+        <NavLink to="/" style={{ fontSize: "1.5rem" }}>
+          Music Platform
+        </NavLink>
+        <div className="auth">
+          <NavLink className="link" to="/sign-in">
+            Sign In
+          </NavLink>
+          <h1 className="slash"> / </h1>
+          <NavLink className="link" to="/sign-up">
+            Sign Up
+          </NavLink>
+        </div>
       </Header>
-      <Content style={styles.contentStyle}>
+      <Content className="content">
         <Outlet />
       </Content>
-      <Footer style={styles.footerStyle}>© 2023, Alexander Alexeichik</Footer>
+      <Footer className="footer">© 2023, Alexander Alexeichik</Footer>
     </div>
   );
 };
