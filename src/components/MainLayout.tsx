@@ -1,29 +1,30 @@
-import { Layout } from "antd";
 import { NavLink, Outlet } from "react-router-dom";
-
-const { Header, Footer, Content } = Layout;
 
 const MainLayout = () => {
   return (
-    <div className="main-layout">
-      <Header className="header">
+    <div className="h-screen flex flex-col justify-between">
+      <header className="container px-10 py-3 mx-auto flex justify-between items-center">
         <NavLink to="/" style={{ fontSize: "1.5rem" }}>
           Music Platform
         </NavLink>
-        <div className="auth">
-          <NavLink className="link" to="/sign-in">
+        <div className="flex">
+          <NavLink className="px-2" to="/sign-in">
             Sign In
           </NavLink>
-          <h1 className="slash"> / </h1>
-          <NavLink className="link" to="/sign-up">
+          <h1 className="text-amber-500"> / </h1>
+          <NavLink className="px-2" to="/sign-up">
             Sign Up
           </NavLink>
         </div>
-      </Header>
-      <Content className="content">
+      </header>
+      <main className="container mx-auto px-2 py-16">
         <Outlet />
-      </Content>
-      <Footer className="footer">© 2023, Alexander Alexeichik</Footer>
+      </main>
+      <footer className="p-3 bg-zinc-100 mt-auto">
+        <h2 className="text-gray-950 text-center">
+          © 2023, Alexander Alexeichik
+        </h2>
+      </footer>
     </div>
   );
 };
