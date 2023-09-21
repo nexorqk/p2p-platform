@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom";
-import WelcomePage from "./pages/WelcomePage";
-import NotFoundPage from "./pages/NotFoundPage";
-import MainLayout from "./components/MainLayout";
-import SignInPage from "./pages/SignInPage";
-import SignUpPage from "./pages/SignUpPage";
+import WelcomePage from "@/pages/WelcomePage";
+import NotFoundPage from "@/pages/NotFoundPage";
+import MainLayout from "@/components/MainLayout";
+import SignInPage from "@/pages/SignInPage";
+import SignUpPage from "@/pages/SignUpPage";
 
 function App() {
   return (
