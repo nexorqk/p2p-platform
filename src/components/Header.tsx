@@ -1,21 +1,22 @@
+import { Container, Stack, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
 const Header = () => {
   return (
-    <header className="container px-10 py-3 mx-auto flex justify-between items-center">
-      <NavLink to="/" style={{ fontSize: "1.5rem" }}>
-        Music Platform
+    <Container component="header" sx={{ py: 2 }}>
+      <NavLink to="/">
+        <Typography variant="h3">Music Platform</Typography>
       </NavLink>
-      <div className="flex">
-        <NavLink className="px-2" to="/sign-in">
-          Sign In
+      <Stack direction="row" alignItems="center" spacing={1}>
+        <NavLink to="/sign-in">
+          <Typography variant="h5">Sign In</Typography>
         </NavLink>
-        <h1 className="text-amber-500"> / </h1>
-        <NavLink className="px-2" to="/sign-up">
-          Sign Up
+        <Typography variant="h4"> / </Typography>
+        <NavLink to="/sign-up">
+          <Typography variant="h5">Sign Up</Typography>
         </NavLink>
-      </div>
-    </header>
+      </Stack>
+    </Container>
   );
 };
 
