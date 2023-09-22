@@ -1,5 +1,5 @@
 const TrainerSignUp = () => {
-  return <form>Make changes to your account here.</form>;
+  return <h1>Trainer Sign Up</h1>;
 };
 
 export default TrainerSignUp;

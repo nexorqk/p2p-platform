@@ -10,10 +10,15 @@ body {
 a {
   text-decoration: none;
   color: inherit;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: rgba(0, 0, 0, 0.5);
 }
 
 .active {
-  color: #b45309;
+  text-decoration: underline;
 }
 
 .layout {

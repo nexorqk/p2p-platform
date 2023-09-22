@@ -1,7 +1,7 @@
+import { useForm, SubmitHandler } from "react-hook-form";
 // import { z } from "zod";
 // import { zodResolver } from "@hookform/resolvers/zod";
 
-import { useForm, SubmitHandler } from "react-hook-form";
 type Inputs = {
   username: string;
   password: string;
@@ -41,8 +41,8 @@ const SignInPage = () => {
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
 
-  console.log(watch("username"), "username"); // watch input value by passing the name of it
-  console.log(watch("password"), "password"); // watch input value by passing the name of it
+  console.log(watch("username"), "username");
+  console.log(watch("password"), "password");
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
