@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import MainLayout from "./components/MainLayout";
 import WelcomePage from "./pages/WelcomePage";
-import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import SignInPage from "./pages/SignInPage";
 
 function App() {
   return (

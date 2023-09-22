@@ -4,6 +4,7 @@
 
 body {
   margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 a {
@@ -13,4 +14,26 @@ a {
 
 .active {
   color: #b45309;
+}
+
+.layout {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.main {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.footer {
+  background: #f4f4f5;
+  text-align: center;
+  padding: 10px;
+  margin-top: auto;
+  font-size: 14px;
 }

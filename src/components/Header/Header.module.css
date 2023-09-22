@@ -1,0 +1,17 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  font-size: 2rem;
+}
+
+.auth {
+  display: flex;
+  align-items: center;
+  font-size: 1.3rem;
+}
+
+.slash {
+  padding: 0 10px;
+}

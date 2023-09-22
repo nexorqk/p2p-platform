@@ -1,27 +1,15 @@
-import { Box, Container, Typography } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
 
 const MainLayout = () => {
   return (
-    <Box
-      height="100vh"
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-      }}
-    >
+    <div className="layout">
       <Header />
-      <Container component="main">
+      <main className="main">
         <Outlet />
-      </Container>
-      <Box sx={{ background: "#f4f4f5", mt: "auto", p: 1.5 }}>
-        <Typography variant="body2" align="center">
-          © 2023, Alexander Alexeichik
-        </Typography>
-      </Box>
-    </Box>
+      </main>
+      <footer className="footer">© 2023, Alexander Alexeichik</footer>
+    </div>
   );
 };
 

@@ -1,0 +1,18 @@
+.button {
+  outline: none;
+  border: none;
+  background-color: indianred;
+  color: white;
+  font-size: 1.1rem;
+  padding: 10px;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: rgb(214, 120, 120);
+}
+
+.button:active {
+  background-color: rgb(207, 64, 64);
+}
