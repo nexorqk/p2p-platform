@@ -4,7 +4,6 @@
 
 body {
   margin: 0;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 a {
@@ -21,24 +20,17 @@ a:hover {
   text-decoration: underline;
 }
 
-.layout {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
 .main {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 40px 20px;
+}
+
+.content {
+  background-color: #fff;
 }
 
 .footer {
-  background: #f4f4f5;
   text-align: center;
-  padding: 10px;
-  margin-top: auto;
-  font-size: 14px;
 }
