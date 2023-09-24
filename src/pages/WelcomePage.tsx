@@ -1,10 +1,10 @@
-import { Typography } from "antd";
+import { Typography } from "@mui/material";
 
 const WelcomePage = () => {
   return (
-    <Typography.Title level={1}>
+    <Typography variant="h1">
       Welcome p2p platform for searching Music Trainer!
-    </Typography.Title>
+    </Typography>
   );
 };
 

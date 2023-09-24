@@ -1,34 +1,23 @@
-import { Tabs } from "antd";
-import type { TabsProps } from "antd";
+import { Box, Tab, Tabs } from "@mui/material";
 import StudentSinUp from "../components/StudentSignUp";
 import TrainerSignUp from "../components/TrainerSignUp";
-
-const onChange = (key: string) => {
-  console.log(key);
-};
-
-const items: TabsProps["items"] = [
-  {
-    key: "1",
-    label: "Student",
-    children: <StudentSinUp />,
-  },
-  {
-    key: "2",
-    label: "Trainer",
-    children: <TrainerSignUp />,
-  },
-];
+import { useState } from "react";
 
 const SignUpPage = () => {
+  const [value, setValue] = useState(0);
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
+
   return (
-    <Tabs
-      defaultActiveKey="1"
-      centered
-      items={items}
-      onChange={onChange}
-      indicatorSize={(origin) => origin - 16}
-    />
+    <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
+      <Tabs value={value} onChange={handleChange} centered>
+        <Tab label="Student" />
+        <Tab label="Trainer" />
+      </Tabs>
+      {value === 0 ? <StudentSinUp /> : <TrainerSignUp />}
+    </Box>
   );
 };
 

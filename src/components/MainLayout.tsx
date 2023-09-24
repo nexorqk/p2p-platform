@@ -1,22 +1,20 @@
 import { Outlet } from "react-router-dom";
-import { Layout } from "antd";
+import { Box } from "@mui/material";
 import Header from "./Header";
-
-const { Footer, Content } = Layout;
 
 const MainLayout = () => {
   return (
-    <Layout>
+    <>
       <Header />
-      <Content className="main">
+      <Box component="main" className="main">
         <div className="main-container">
           <Outlet />
         </div>
-      </Content>
-      <Footer style={{ textAlign: "center" }}>
+      </Box>
+      <Box component="footer" style={{ textAlign: "center" }}>
         © 2023, Alexander Alexeichik
-      </Footer>
-    </Layout>
+      </Box>
+    </>
   );
 };
 

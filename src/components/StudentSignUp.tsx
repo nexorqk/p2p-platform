@@ -1,109 +1,34 @@
-import {
-  Button,
-  DatePicker,
-  DatePickerProps,
-  Form,
-  Input,
-  Select,
-  Slider,
-  TimeRangePickerProps,
-  TreeSelect,
-} from "antd";
-import {
-  EyeInvisibleOutlined,
-  EyeTwoTone,
-  UserOutlined,
-} from "@ant-design/icons";
+import { useForm, SubmitHandler } from "react-hook-form";
 
-type FieldType = {
-  username: string;
-  password: string;
-  remember: string;
+type Inputs = {
+  example: string;
+  exampleRequired: string;
 };
 
-const { RangePicker } = DatePicker;
+const TrainerSignIn = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Inputs>();
+  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
 
-const StudentSinUp = () => {
-  const onFinish = (values: unknown) => {
-    console.log("Success:", values);
-  };
-
-  const onFinishFailed = (errorInfo: unknown) => {
-    console.log("Failed:", errorInfo);
-  };
-
-  const onBirthDatePicker: DatePickerProps["onChange"] = (date, dateString) => {
-    console.log(date, dateString);
-  };
-
-  const onExperiencePicker: TimeRangePickerProps["onChange"] = (date) => {
-    console.log(date);
-  };
-
-  const onSliderChange = (value: unknown) => {
-    console.log(value);
-  };
+  console.log(watch("example")); // watch input value by passing the name of it
 
   return (
-    <Form
-      labelCol={{ span: 4 }}
-      wrapperCol={{ span: 14 }}
-      layout="horizontal"
-      style={{ maxWidth: 800 }}
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
-    >
-      <Form.Item<FieldType>
-        label="Username"
-        name="username"
-        rules={[{ required: true, message: "Please input your username!" }]}
-      >
-        <Input placeholder="Enter your username" prefix={<UserOutlined />} />
-      </Form.Item>
-      <Form.Item<FieldType>
-        label="Password"
-        name="password"
-        rules={[{ required: true, message: "Please input your password!" }]}
-      >
-        <Input.Password
-          placeholder="input password"
-          iconRender={(visible) =>
-            visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
-          }
-        />
-      </Form.Item>
-      <Form.Item label="Select">
-        <Select>
-          <Select.Option value="demo">Demo</Select.Option>
-        </Select>
-      </Form.Item>
-      <Form.Item label="TreeSelect">
-        <TreeSelect
-          treeData={[
-            {
-              title: "Light",
-              value: "light",
-              children: [{ title: "Bamboo", value: "bamboo" }],
-            },
-          ]}
-        />
-      </Form.Item>
-      <Form.Item label="Birth Date">
-        <DatePicker onChange={onBirthDatePicker} />
-      </Form.Item>
-      <Form.Item label="Experience">
-        <RangePicker onChange={onExperiencePicker} />
-      </Form.Item>
-      <Form.Item label="Your Training level">
-        <Slider onChange={onSliderChange} defaultValue={50} />
-      </Form.Item>
-      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
-      </Form.Item>
-    </Form>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      {/* register your input into the hook by invoking the "register" function */}
+      <input defaultValue="test" {...register("example")} />
+
+      {/* include validation with required or other standard HTML validation rules */}
+      <input {...register("exampleRequired", { required: true })} />
+      {/* errors will return when field validation fails  */}
+      {errors.exampleRequired && <span>This field is required</span>}
+
+      <input type="submit" />
+    </form>
   );
 };
 
-export default StudentSinUp;
+export default TrainerSignIn;
