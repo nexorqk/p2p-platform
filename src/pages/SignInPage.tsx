@@ -1,10 +1,15 @@
 import { Button, Checkbox, Form, Input } from "antd";
+import {
+  EyeInvisibleOutlined,
+  EyeTwoTone,
+  UserOutlined,
+} from "@ant-design/icons";
 
-const onFinish = (values: any) => {
+const onFinish = (values: unknown) => {
   console.log("Success:", values);
 };
 
-const onFinishFailed = (errorInfo: any) => {
+const onFinishFailed = (errorInfo: unknown) => {
   console.log("Failed:", errorInfo);
 };
 
@@ -31,7 +36,7 @@ const SignInPage = () => {
         name="username"
         rules={[{ required: true, message: "Please input your username!" }]}
       >
-        <Input />
+        <Input placeholder="Enter your username" prefix={<UserOutlined />} />
       </Form.Item>
 
       <Form.Item<FieldType>
@@ -39,7 +44,12 @@ const SignInPage = () => {
         name="password"
         rules={[{ required: true, message: "Please input your password!" }]}
       >
-        <Input.Password />
+        <Input.Password
+          placeholder="input password"
+          iconRender={(visible) =>
+            visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+          }
+        />
       </Form.Item>
 
       <Form.Item<FieldType>

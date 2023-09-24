@@ -6,13 +6,17 @@ const { Footer, Content } = Layout;
 
 const MainLayout = () => {
   return (
-    <div>
+    <Layout>
       <Header />
       <Content className="main">
-        <Outlet />
+        <div className="main-container">
+          <Outlet />
+        </div>
       </Content>
-      <Footer className="footer">© 2023, Alexander Alexeichik</Footer>
-    </div>
+      <Footer style={{ textAlign: "center" }}>
+        © 2023, Alexander Alexeichik
+      </Footer>
+    </Layout>
   );
 };
 

@@ -1,241 +1,216 @@
-import { CopyOutlined } from "@ant-design/icons";
 import {
-  AutoComplete,
   Button,
-  Cascader,
   DatePicker,
+  DatePickerProps,
+  Form,
   Input,
-  InputNumber,
   Select,
-  Space,
-  TimePicker,
-  Tooltip,
-  TreeSelect,
+  Slider,
+  TimeRangePickerProps,
 } from "antd";
+import {
+  EyeInvisibleOutlined,
+  EyeTwoTone,
+  UserOutlined,
+} from "@ant-design/icons";
+import { useState } from "react";
 
-const { Option } = Select;
-const { TreeNode } = TreeSelect;
+type FieldType = {
+  username: string;
+  password: string;
+  remember: string;
+};
+
+const { RangePicker } = DatePicker;
 
 const TrainerSignUp = () => {
+  const [typeOfSport, setTypeOfSport] = useState("");
+  const sportTypesArr: { [x: string]: string }[] = [
+    { wrestling: "Борьба" },
+    { gymnastics: "Гимнастика" },
+    { fightings: "Единоборства" },
+    { gaming: "Игровые" },
+    { intelligent: "Интеллектуальные" },
+    { cybersport: "Киберспорт" },
+    { athletics: "Легкая атлетика" },
+    { power: "Силовые" },
+    { technical: "Технические" },
+    { fitness: "Фитнес" },
+    { hobby: "Хобби" },
+  ];
+
+  const specificSport: { [x: string]: string[] } = {
+    wrestling: [
+      "Армрестлинг",
+      "Вольная",
+      "Греко-римская",
+      "Грэпплинг",
+      "Дзюдо",
+      "Женская борьба",
+      "Мас-рестлинг",
+      "Самбо",
+      "Сумо",
+    ],
+    gymnastics: [
+      "Акробатика",
+      "Батуты",
+      "Воркаут",
+      "Спортивная",
+      "Художественная",
+    ],
+    fightings: [
+      "Бокс",
+      "Джиу-джитсу",
+      "Карате",
+      "Кикбоксинг",
+      "ММА",
+      "Панкратион",
+      "Тхэквондо",
+      "Универсальный бой",
+      "Ушу",
+      "Фехтование",
+    ],
+    gaming: [
+      "Бадминтон",
+      "Гандбол",
+      "Городки",
+      "Лапта",
+      "Настольный теннис",
+      "Регби",
+      "Теннис",
+      "Флорбол",
+    ],
+    intelligent: ["Го", "Спортивное ориентирование", "Шахматы", "Шашки"],
+    cybersport: ["CS GO", "Dota 2", "PUBG", "Overwatch", "Warcraft 3"],
+    athletics: ["Взрослая", "Массовая", "Юношеская"],
+    power: ["Гиревой спорт", "Пауэрлифтинг", "Русский жим", "Тяжелая атлетика"],
+    technical: [
+      "Автоспорт",
+      "Велоспорт",
+      "Вертолётный",
+      "Водно-моторный",
+      "Моделирование",
+      "Мотоспорт",
+      "Стрельба",
+      "Триатлон",
+    ],
+    fitness: ["Аэробика", "Бодибилдинг"],
+    hobby: [
+      "Бильярд",
+      "Боулинг",
+      "Дартс",
+      "Парашют",
+      "Пейнтбол",
+      "Рыболовный спорт",
+      "Скейтборд",
+      "Спортивное собаководство",
+      "Спортивный туризм",
+    ],
+  };
+  const onFinish = (values: unknown) => {
+    console.log("Success:", values);
+  };
+
+  const onFinishFailed = (errorInfo: unknown) => {
+    console.log("Failed:", errorInfo);
+  };
+
+  const handleTypeOfSport = (value: string) => {
+    setTypeOfSport(value);
+  };
+
+  const handleOption = (e: unknown) => {
+    console.log(e);
+  };
+
+  const onBirthDatePicker: DatePickerProps["onChange"] = (date, dateString) => {
+    console.log(date, dateString);
+  };
+
+  const onExperiencePicker: TimeRangePickerProps["onChange"] = (date) => {
+    console.log(date);
+  };
+
+  const onSliderChange = (value: unknown) => {
+    console.log(value);
+  };
+
+  if (typeOfSport) {
+    console.log(specificSport[typeOfSport]);
+  }
+
   return (
-    <div className="site-space-compact-wrapper">
-      <Space.Compact block>
-        <Input style={{ width: "20%" }} defaultValue="0571" />
-        <Input style={{ width: "30%" }} defaultValue="26888888" />
-      </Space.Compact>
-      <br />
-      <Space.Compact block size="small">
-        <Input
-          style={{ width: "calc(100% - 200px)" }}
-          defaultValue="https://ant.design"
+    <Form
+      labelCol={{ span: 4 }}
+      wrapperCol={{ span: 14 }}
+      layout="horizontal"
+      style={{ maxWidth: 600 }}
+      onFinish={onFinish}
+      onFinishFailed={onFinishFailed}
+    >
+      <Form.Item<FieldType>
+        label="Username"
+        name="username"
+        rules={[{ required: true, message: "Please input your username!" }]}
+      >
+        <Input placeholder="Enter your username" prefix={<UserOutlined />} />
+      </Form.Item>
+      <Form.Item<FieldType>
+        label="Password"
+        name="password"
+        rules={[{ required: true, message: "Please input your password!" }]}
+      >
+        <Input.Password
+          placeholder="input password"
+          iconRender={(visible) =>
+            visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+          }
         />
-        <Button type="primary">Submit</Button>
-      </Space.Compact>
-      <br />
-      <Space.Compact block>
-        <Input
-          style={{ width: "calc(100% - 200px)" }}
-          defaultValue="https://ant.design"
-        />
-        <Button type="primary">Submit</Button>
-      </Space.Compact>
-      <br />
-      <Space.Compact block>
-        <Input
-          style={{ width: "calc(100% - 200px)" }}
-          defaultValue="git@github.com:ant-design/ant-design.git"
-        />
-        <Tooltip title="copy git url">
-          <Button icon={<CopyOutlined />} />
-        </Tooltip>
-      </Space.Compact>
-      <br />
-      <Space.Compact block>
-        <Select defaultValue="Zhejiang" allowClear>
-          <Option value="Zhejiang">Zhejiang</Option>
-          <Option value="Jiangsu">Jiangsu</Option>
+      </Form.Item>
+      <Form.Item label="Type of sport">
+        <Select onChange={handleTypeOfSport}>
+          {sportTypesArr.map((sport) => {
+            const key = Object.keys(sport)[0];
+            return (
+              <Select.Option key={key} value={key} onChange={handleOption}>
+                {sport[key]}
+              </Select.Option>
+            );
+          })}
         </Select>
-        <Input
-          style={{ width: "50%" }}
-          defaultValue="Xihu District, Hangzhou"
-        />
-      </Space.Compact>
-      <br />
-      <Space.Compact block>
-        <Select
-          allowClear
-          mode="multiple"
-          defaultValue="Zhejianggggg"
-          style={{ width: "50%" }}
-        >
-          <Option value="Zhejianggggg">Zhejianggggg</Option>
-          <Option value="Jiangsu">Jiangsu</Option>
+      </Form.Item>
+      <Form.Item label="Specific sport">
+        <Select>
+          {typeOfSport
+            ? specificSport[typeOfSport].map((sport, idx) => {
+                return (
+                  <Select.Option
+                    key={idx}
+                    value={sport}
+                    onChange={handleOption}
+                  >
+                    {sport}
+                  </Select.Option>
+                );
+              })
+            : null}
         </Select>
-        <Input
-          style={{ width: "50%" }}
-          defaultValue="Xihu District, Hangzhou"
-        />
-      </Space.Compact>
-      <br />
-      <Space.Compact block>
-        <Input.Search style={{ width: "30%" }} defaultValue="0571" />
-        <Input.Search
-          allowClear
-          style={{ width: "50%" }}
-          defaultValue="26888888"
-        />
-        <Input.Search style={{ width: "20%" }} defaultValue="+1" />
-      </Space.Compact>
-      <br />
-      <Space.Compact block>
-        <Select defaultValue="Option1">
-          <Option value="Option1">Option1</Option>
-          <Option value="Option2">Option2</Option>
-        </Select>
-        <Input style={{ width: "50%" }} defaultValue="input content" />
-        <InputNumber defaultValue={12} />
-      </Space.Compact>
-      <br />
-      <Space.Compact block>
-        <Input style={{ width: "50%" }} defaultValue="input content" />
-        <DatePicker style={{ width: "50%" }} />
-      </Space.Compact>
-      <br />
-      <Space.Compact block>
-        <DatePicker.RangePicker style={{ width: "70%" }} />
-        <Input style={{ width: "30%" }} defaultValue="input content" />
-        <Button type="primary">查询</Button>
-      </Space.Compact>
-      <br />
-      <Space.Compact block>
-        <Input style={{ width: "30%" }} defaultValue="input content" />
-        <DatePicker.RangePicker style={{ width: "70%" }} />
-      </Space.Compact>
-      <br />
-      <Space.Compact block>
-        <Select defaultValue="Option1-1">
-          <Option value="Option1-1">Option1-1</Option>
-          <Option value="Option1-2">Option1-2</Option>
-        </Select>
-        <Select defaultValue="Option2-2">
-          <Option value="Option2-1">Option2-1</Option>
-          <Option value="Option2-2">Option2-2</Option>
-        </Select>
-      </Space.Compact>
-      <br />
-      <Space.Compact block>
-        <Select defaultValue="1">
-          <Option value="1">Between</Option>
-          <Option value="2">Except</Option>
-        </Select>
-        <Input
-          style={{ width: 100, textAlign: "center" }}
-          placeholder="Minimum"
-        />
-        <Input
-          className="site-input-split"
-          style={{
-            width: 30,
-            borderLeft: 0,
-            borderRight: 0,
-            pointerEvents: "none",
-          }}
-          placeholder="~"
-          disabled
-        />
-        <Input
-          className="site-input-right"
-          style={{
-            width: 100,
-            textAlign: "center",
-          }}
-          placeholder="Maximum"
-        />
-      </Space.Compact>
-      <br />
-      <Space.Compact block>
-        <Select defaultValue="Sign Up" style={{ width: "30%" }}>
-          <Option value="Sign Up">Sign Up</Option>
-          <Option value="Sign In">Sign In</Option>
-        </Select>
-        <AutoComplete
-          style={{ width: "70%" }}
-          placeholder="Email"
-          options={[{ value: "text 1" }, { value: "text 2" }]}
-        />
-      </Space.Compact>
-      <br />
-      <Space.Compact block>
-        <TimePicker style={{ width: "70%" }} />
-        <Cascader
-          style={{ width: "70%" }}
-          options={[
-            {
-              value: "zhejiang",
-              label: "Zhejiang",
-              children: [
-                {
-                  value: "hangzhou",
-                  label: "Hangzhou",
-                  children: [
-                    {
-                      value: "xihu",
-                      label: "West Lake",
-                    },
-                  ],
-                },
-              ],
-            },
-            {
-              value: "jiangsu",
-              label: "Jiangsu",
-              children: [
-                {
-                  value: "nanjing",
-                  label: "Nanjing",
-                  children: [
-                    {
-                      value: "zhonghuamen",
-                      label: "Zhong Hua Men",
-                    },
-                  ],
-                },
-              ],
-            },
-          ]}
-          placeholder="Select Address"
-        />
-      </Space.Compact>
-      <br />
-      <Space.Compact block>
-        <TimePicker.RangePicker />
-        <TreeSelect
-          showSearch
-          style={{ width: "60%" }}
-          value="leaf1"
-          dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
-          placeholder="Please select"
-          allowClear
-          treeDefaultExpandAll
-          onChange={() => {}}
-        >
-          <TreeNode value="parent 1" title="parent 1">
-            <TreeNode value="parent 1-0" title="parent 1-0">
-              <TreeNode value="leaf1" title="leaf1" />
-              <TreeNode value="leaf2" title="leaf2" />
-            </TreeNode>
-            <TreeNode value="parent 1-1" title="parent 1-1">
-              <TreeNode
-                value="leaf3"
-                title={<b style={{ color: "#08c" }}>leaf3</b>}
-              />
-            </TreeNode>
-          </TreeNode>
-        </TreeSelect>
-        <Button type="primary">Submit</Button>
-      </Space.Compact>
-      <br />
-    </div>
+      </Form.Item>
+      <Form.Item label="Birth Date">
+        <DatePicker onChange={onBirthDatePicker} />
+      </Form.Item>
+      <Form.Item label="Experience">
+        <RangePicker onChange={onExperiencePicker} />
+      </Form.Item>
+      <Form.Item label="Power">
+        <Slider onChange={onSliderChange} defaultValue={50} />
+      </Form.Item>
+      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+        <Button type="primary" htmlType="submit">
+          Submit
+        </Button>
+      </Form.Item>
+    </Form>
   );
 };
 
