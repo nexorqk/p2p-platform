@@ -1,8 +1,10 @@
+import { TextField } from "@mui/material";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 type Inputs = {
   example: string;
   exampleRequired: string;
+  age: number;
 };
 
 const TrainerSignIn = () => {
@@ -18,6 +20,11 @@ const TrainerSignIn = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      <TextField
+        label="Write your age"
+        type="number"
+        {...register("age", { min: 18, max: 99 })}
+      />
       {/* register your input into the hook by invoking the "register" function */}
       <input defaultValue="test" {...register("example")} />
 

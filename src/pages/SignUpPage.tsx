@@ -12,7 +12,7 @@ const SignUpPage = () => {
 
   return (
     <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
-      <Tabs value={value} onChange={handleChange} centered>
+      <Tabs value={value} onChange={handleChange} centered sx={{ mb: 2 }}>
         <Tab label="Student" />
         <Tab label="Trainer" />
       </Tabs>
