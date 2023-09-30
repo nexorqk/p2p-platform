@@ -40,7 +40,7 @@ const SignInPage = () => {
           autoComplete="current-password"
           {...register("lastName", { pattern: /^[A-Za-z]+$/i })}
         />
-        <Button type="submit" variant="contained">
+        <Button size="large" type="submit" variant="contained">
           Sign In
         </Button>
       </Box>

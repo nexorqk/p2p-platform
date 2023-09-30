@@ -1,28 +1,29 @@
 import { NavLink } from "react-router-dom";
 import { Box, Container, Typography } from "@mui/material";
 
-const Header = () => {
-  return (
-    <Container
-      sx={{
-        display: "flex",
-        justifyContent: "space-between",
-        p: 3,
-      }}
-      component="header"
-    >
-      <NavLink to="/">
-        <Typography variant="h4" component="h1">
-          Music Platform
-        </Typography>
-      </NavLink>
-      <Box sx={{ display: "flex", alignItems: "center" }}>
+const Header = () => (
+  <Container
+    sx={{
+      display: "flex",
+      justifyContent: "space-between",
+      p: 3,
+    }}
+    component="header"
+  >
+    <Typography variant="h4" component="h1">
+      <NavLink to="/">Music Platform</NavLink>
+    </Typography>
+    <Box sx={{ display: "flex", alignItems: "center" }}>
+      <Typography variant="h5">
         <NavLink to="/sign-in">Sign In</NavLink>
-        <Typography sx={{ px: 1 }}>/</Typography>
+      </Typography>
+      <Typography sx={{ px: 1 }}>/</Typography>
+
+      <Typography variant="h5">
         <NavLink to="/sign-up">Sign Up</NavLink>
-      </Box>
-    </Container>
-  );
-};
+      </Typography>
+    </Box>
+  </Container>
+);
 
 export default Header;

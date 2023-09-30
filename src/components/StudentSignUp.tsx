@@ -1,41 +1,76 @@
-import { TextField } from "@mui/material";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { Button, MenuItem, Stack, TextField } from "@mui/material";
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
+import { Inputs } from "../types/sign-up";
+import SimpleSelect from "./ui/SimpleSelect";
 
-type Inputs = {
-  example: string;
-  exampleRequired: string;
-  age: number;
-};
+const currencies = [
+  {
+    value: "USD",
+    label: "$",
+  },
+  {
+    value: "EUR",
+    label: "€",
+  },
+  {
+    value: "BTC",
+    label: "฿",
+  },
+  {
+    value: "JPY",
+    label: "¥",
+  },
+];
 
-const TrainerSignIn = () => {
+const StudentSignUp = () => {
   const {
     register,
     handleSubmit,
+    control,
     watch,
     formState: { errors },
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
 
-  console.log(watch("example")); // watch input value by passing the name of it
+  console.log(watch("age"));
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <TextField
-        label="Write your age"
-        type="number"
-        {...register("age", { min: 18, max: 99 })}
-      />
-      {/* register your input into the hook by invoking the "register" function */}
-      <input defaultValue="test" {...register("example")} />
-
-      {/* include validation with required or other standard HTML validation rules */}
-      <input {...register("exampleRequired", { required: true })} />
-      {/* errors will return when field validation fails  */}
-      {errors.exampleRequired && <span>This field is required</span>}
-
-      <input type="submit" />
+      <Stack spacing={2} maxWidth={600} margin="0 auto">
+        <TextField
+          error={!!errors.username}
+          label="Username"
+          type="text"
+          helperText={errors.username ? errors.username.message : null}
+          {...(register("username"), { required: true })}
+        />
+        <TextField
+          error={!!errors.password}
+          label="Password"
+          type="password"
+          helperText={errors.password ? errors.password.message : null}
+          {...(register("password"), { required: true })}
+        />
+        <TextField
+          error={!!errors.fullname}
+          label="Fullname"
+          type="text"
+          helperText={errors.fullname ? errors.fullname.message : null}
+          {...register("fullname")}
+        />
+        <TextField
+          label="Write your age"
+          type="number"
+          size="small"
+          {...register("age", { min: 18, max: 99 })}
+        />
+        <SimpleSelect control={control} name="gender" currencies={currencies} />
+        <Button size="large" type="submit" variant="contained">
+          Submit
+        </Button>
+      </Stack>
     </form>
   );
 };
 
-export default TrainerSignIn;
+export default StudentSignUp;
