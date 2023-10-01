@@ -4,10 +4,15 @@ enum GenderEnum {
   other = "other",
 }
 
-export type Inputs = {
+export interface StudentSignUpForm {
   username: string;
   password: string;
   fullname: string;
   age: number;
   gender: GenderEnum;
-};
+}
+
+export interface TrainerSignUpForm {
+  firstName: string;
+  gender: GenderEnum;
+}

@@ -1,3 +1,9 @@
+export const gednerArr: { [x: string]: string }[] = [
+  { id: "man", label: "Man" },
+  { id: "female", label: "Female" },
+  { id: "other", label: "Other" },
+];
+
 export const sportTypesArr: { [x: string]: string }[] = [
   { wrestling: "Борьба" },
   { gymnastics: "Гимнастика" },

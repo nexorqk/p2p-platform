@@ -1,38 +1,18 @@
-import { Button, MenuItem, Stack, TextField } from "@mui/material";
-import { useForm, SubmitHandler, Controller } from "react-hook-form";
-import { Inputs } from "../types/sign-up";
-import SimpleSelect from "./ui/SimpleSelect";
-
-const currencies = [
-  {
-    value: "USD",
-    label: "$",
-  },
-  {
-    value: "EUR",
-    label: "€",
-  },
-  {
-    value: "BTC",
-    label: "฿",
-  },
-  {
-    value: "JPY",
-    label: "¥",
-  },
-];
+import { Button, Stack, TextField } from "@mui/material";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { StudentSignUpForm } from "../types/sign-up";
+import { SelectElement } from "react-hook-form-mui";
+import { gednerArr } from "../constants/type-of-sport";
 
 const StudentSignUp = () => {
   const {
     register,
     handleSubmit,
     control,
-    watch,
     formState: { errors },
-  } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
-
-  console.log(watch("age"));
+  } = useForm<StudentSignUpForm>();
+  const onSubmit: SubmitHandler<StudentSignUpForm> = (data) =>
+    console.log(data);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -64,7 +44,13 @@ const StudentSignUp = () => {
           size="small"
           {...register("age", { min: 18, max: 99 })}
         />
-        <SimpleSelect control={control} name="gender" currencies={currencies} />
+        <SelectElement
+          name="gender"
+          label="Gedner"
+          options={gednerArr}
+          helperText="Choose your gender if you want"
+          control={control}
+        />
         <Button size="large" type="submit" variant="contained">
           Submit
         </Button>
