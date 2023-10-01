@@ -4,17 +4,12 @@ import Header from "./Header";
 const MainLayout = () => (
   <>
     <Header />
-    {/* <Container
-      component="main"
-      sx={{ minHeight: "calc(100vh - 158px)", py: 2 }}
-    > */}
-    <Outlet />
-    {/* </Container> */}
-    {/* <Box component="footer" sx={{ p: 3, background: "#f5f5f5" }}> */}
-    {/* <Typography variant="body2" align="center"> */}
-    <footer>© 2023, Alexander Alexeichik</footer>
-    {/* </Typography> */}
-    {/* </Box> */}
+    <main className="flex-1 max-w-7xl container py-8">
+      <Outlet />
+    </main>
+    <footer className="w-full p-3 text-sm bg-slate-200 text-center">
+      © 2023, Alexander Alexeichik
+    </footer>
   </>
 );
 

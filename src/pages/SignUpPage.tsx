@@ -1,31 +1,24 @@
-import { useState } from "react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import TrainerSignUp from "../components/TrainerSignUp";
 import StudentSignUp from "../components/StudentSignUp";
 
-const SignUp = ({ value }: { value: number }) => {
-  if (value === 0) {
-    return <StudentSignUp />;
-  } else {
-    return <TrainerSignUp />;
-  }
-};
-
-const SignUpPage = () => {
-  const [value, setValue] = useState(0);
-
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
-
-  return (
-    <div>
-      {/* <Tabs value={value} onChange={handleChange} centered sx={{ mb: 2 }}>
-        <Tab label="Student" />
-        <Tab label="Trainer" />
-      </Tabs>
-      <SignUp value={value} /> */}
-    </div>
-  );
-};
+const SignUpPage = () => (
+  <Tabs defaultValue="student">
+    <TabsList className="w-full">
+      <TabsTrigger className="w-full" value="student">
+        Student
+      </TabsTrigger>
+      <TabsTrigger className="w-full" value="trainer">
+        Trainer
+      </TabsTrigger>
+    </TabsList>
+    <TabsContent value="student">
+      <StudentSignUp />
+    </TabsContent>
+    <TabsContent value="trainer">
+      <TrainerSignUp />
+    </TabsContent>
+  </Tabs>
+);
 
 export default SignUpPage;

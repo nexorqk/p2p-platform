@@ -14,7 +14,7 @@ const StudentSignUp = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Stack spacing={2} maxWidth={600} margin="0 auto">
+      {/* <Stack spacing={2} maxWidth={600} margin="0 auto">
         <TextField
           error={!!errors.username}
           label="Username"
@@ -52,7 +52,8 @@ const StudentSignUp = () => {
         <Button size="large" type="submit" variant="contained">
           Submit
         </Button>
-      </Stack>
+      </Stack> */}
+      Studnt
     </form>
   );
 };
