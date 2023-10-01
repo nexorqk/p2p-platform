@@ -1,4 +1,4 @@
-import { Box, Button, TextField } from "@mui/material";
+import { Button } from "@/components/ui/button";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 interface IFormInput {
@@ -12,38 +12,28 @@ const SignInPage = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: 2,
-          maxWidth: 400,
-          margin: "0 auto",
-        }}
-      >
-        <TextField
+      <div>
+        <input
           id="outlined-required"
-          label="Write fullname"
+          placeholder="Write fullname"
           {...register("fullName", { required: true, maxLength: 30 })}
         />
-        <TextField
+        <input
           required
           id="outlined-required"
-          label="Write username"
+          placeholder="Write username"
           {...register("firstName", { required: true, maxLength: 20 })}
         />
-        <TextField
+        <input
           required
           id="outlined-password-input"
-          label="Write password"
+          placeholder="Write password"
           type="password"
           autoComplete="current-password"
           {...register("lastName", { pattern: /^[A-Za-z]+$/i })}
         />
-        <Button size="large" type="submit" variant="contained">
-          Sign In
-        </Button>
-      </Box>
+        <Button type="submit">Sign In</Button>
+      </div>
     </form>
   );
 };

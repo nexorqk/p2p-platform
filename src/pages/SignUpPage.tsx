@@ -1,4 +1,3 @@
-import { Box, Tab, Tabs } from "@mui/material";
 import { useState } from "react";
 import TrainerSignUp from "../components/TrainerSignUp";
 import StudentSignUp from "../components/StudentSignUp";
@@ -19,13 +18,13 @@ const SignUpPage = () => {
   };
 
   return (
-    <Box>
-      <Tabs value={value} onChange={handleChange} centered sx={{ mb: 2 }}>
+    <div>
+      {/* <Tabs value={value} onChange={handleChange} centered sx={{ mb: 2 }}>
         <Tab label="Student" />
         <Tab label="Trainer" />
       </Tabs>
-      <SignUp value={value} />
-    </Box>
+      <SignUp value={value} /> */}
+    </div>
   );
 };
 

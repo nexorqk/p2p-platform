@@ -11,7 +11,7 @@ function App() {
       <Route path="/" element={<MainLayout />}>
         <Route index element={<WelcomePage />} />
         <Route path="sign-in" element={<SignInPage />} />
-        <Route path="sign-up" element={<SignUpPage />} />
+        {/* <Route path="sign-up" element={<SignUpPage />} /> */}
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>

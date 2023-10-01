@@ -1,8 +1,7 @@
-import { Button, FormControl, Stack, TextField } from "@mui/material";
 import { useForm, SubmitHandler } from "react-hook-form";
-import MultipleSelect from "./ui/MultipleSelect";
 import { sportTypesArr } from "../constants/type-of-sport";
 import { TrainerSignUpForm } from "../types/sign-up";
+import { Button } from "./ui/button";
 
 const TrainerSignUp = () => {
   const { register, handleSubmit, control } = useForm<TrainerSignUpForm>();
@@ -11,20 +10,10 @@ const TrainerSignUp = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Stack spacing={2} maxWidth={600} margin="0 auto">
-        <FormControl>
-          <TextField label="Username" {...register("firstName")} />
-        </FormControl>
-        <MultipleSelect
-          dataArr={sportTypesArr}
-          control={control}
-          name="Sport"
-        />
-
-        <Button type="submit" variant="contained">
-          Submit
-        </Button>
-      </Stack>
+      <div>
+        <input {...register("firstName")} />
+        <Button type="submit">Submit</Button>
+      </div>
     </form>
   );
 };

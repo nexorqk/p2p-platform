@@ -1,7 +1,5 @@
-import { Button, Stack, TextField } from "@mui/material";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { StudentSignUpForm } from "../types/sign-up";
-import { SelectElement } from "react-hook-form-mui";
 import { gednerArr } from "../constants/type-of-sport";
 
 const StudentSignUp = () => {
