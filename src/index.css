@@ -75,20 +75,14 @@
   }
 }
 
-#root {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-.active {
-  @apply text-indigo-800 font-extrabold;
-}
-
 a {
-  transition: color 0.3s ease;
+  @apply transition-colors;
 }
 
 a:hover {
   @apply text-zinc-500;
+}
+
+.active {
+  @apply text-indigo-800 font-extrabold;
 }
