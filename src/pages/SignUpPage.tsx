@@ -3,7 +3,7 @@ import TrainerSignUp from "../components/TrainerSignUp";
 import StudentSignUp from "../components/StudentSignUp";
 
 const SignUpPage = () => (
-  <Tabs defaultValue="student">
+  <Tabs defaultValue="student" className="max-w-4xl mx-auto">
     <TabsList className="w-full">
       <TabsTrigger className="w-full" value="student">
         Student
