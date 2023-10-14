@@ -7,7 +7,7 @@ const MainLayout = () => (
     <Header />
     <Container
       component="main"
-      sx={{ minHeight: "calc(100vh - 158px)", py: 4 }}
+      sx={{ minHeight: "calc(100vh - 142px)", py: 4 }}
     >
       <Outlet />
     </Container>

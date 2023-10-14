@@ -3,9 +3,12 @@
   "private": true,
   "version": "5.0.0",
   "type": "module",
+  "homepage": "https://github.com/nexorqk/p2p-platform",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -24,6 +27,7 @@
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "@vitejs/plugin-react": "latest",
+    "gh-pages": "^6.0.0",
     "typescript": "latest",
     "vite": "latest"
   }

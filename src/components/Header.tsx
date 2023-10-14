@@ -20,7 +20,6 @@ const Header = () => (
       <Typography variant="h4" sx={{ px: 1 }}>
         /
       </Typography>
-
       <Typography variant="h5">
         <NavLink to="/sign-up">Sign Up</NavLink>
       </Typography>
