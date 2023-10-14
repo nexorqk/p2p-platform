@@ -4,7 +4,7 @@ export enum GenderEnum {
   other = "other",
 }
 
-export type SportType = {
+export type SelectType = {
   id: string;
   label: string;
 };

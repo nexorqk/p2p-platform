@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Button, Stack, TextField } from "@mui/material";
 import {
   MultiSelectElement,
@@ -5,13 +6,8 @@ import {
   SelectElement,
 } from "react-hook-form-mui";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { GenderEnum, SportType } from "../types/sign-up";
-import {
-  gednerArr,
-  specificSport,
-  sportTypesArr,
-} from "../constants/type-of-sport";
-import { useEffect, useState } from "react";
+import { GenderEnum, SelectType } from "../types/sign-up";
+import { url } from "../constants";
 
 type FormProps = {
   username: string;
@@ -20,11 +16,14 @@ type FormProps = {
   age: number | undefined;
   gender: GenderEnum | "";
   sport: string;
-  specific_sport: SportType[];
+  specific_sport: SelectType[];
 };
 
 const TrainerSignUp = () => {
-  const [specificValue, setSpecificValue] = useState<SportType[]>([]);
+  const [specificSport, setSpecificSport] = useState<SelectType[]>([]);
+  const [sportTypesArr, setSportTypesArr] = useState<SelectType[]>();
+  const [gednerArr, setGenderArr] = useState<SelectType[]>();
+  const [specificValue, setSpecificValue] = useState([]);
   const {
     watch,
     register,
@@ -40,12 +39,71 @@ const TrainerSignUp = () => {
 
   const onSubmit: SubmitHandler<FormProps> = (data) => console.log(data);
 
-  const sportSelect = watch().sport;
+  const fetchGender = async () => {
+    try {
+      const response = await fetch(`${url}/gender`, {
+        method: "GET",
+        headers: {},
+      });
 
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await response.json();
+      setGenderArr(data);
+    } catch (error) {
+      console.error("Error", error);
+    }
+  };
+  const fetchSportTypesArr = async () => {
+    try {
+      const response = await fetch(`${url}/sportTypesArr`, {
+        method: "GET",
+        headers: {},
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await response.json();
+      setSportTypesArr(data);
+    } catch (error) {
+      console.error("Error", error);
+    }
+  };
+  const fetchSpecificSport = async () => {
+    try {
+      const response = await fetch(`${url}/specificSport`, {
+        method: "GET",
+        headers: {},
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await response.json();
+      setSpecificSport(data);
+    } catch (error) {
+      console.error("Error", error);
+    }
+  };
+  useEffect(() => {
+    fetchGender();
+    fetchSportTypesArr();
+    fetchSpecificSport();
+  }, []);
+
+  const sportSelect = watch().sport;
   useEffect(() => {
     if (sportSelect) {
+      const specificIndex = specificSport?.findIndex(
+        (item) => Object.keys(item)[0] === sportSelect
+      );
       resetField("specific_sport");
-      setSpecificValue(specificSport[sportSelect]);
+      setSpecificValue(Object.values(specificSport[specificIndex])[0] as any);
     }
   }, [sportSelect]);
 

@@ -1,10 +1,12 @@
-import { Button, Stack, TextField, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
+import { Button, Stack, TextField } from "@mui/material";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { StudentSignUpForm } from "../types/sign-up";
+import { SelectType, StudentSignUpForm } from "../types/sign-up";
 import { SelectElement } from "react-hook-form-mui";
-import { gednerArr } from "../constants/type-of-sport";
+import { url } from "../constants";
 
 const StudentSignUp = () => {
+  const [genderArr, setGenderArr] = useState<SelectType[]>([]);
   const {
     register,
     handleSubmit,
@@ -13,6 +15,28 @@ const StudentSignUp = () => {
   } = useForm<StudentSignUpForm>();
   const onSubmit: SubmitHandler<StudentSignUpForm> = (data) =>
     console.log(data);
+
+  const fetchGender = async () => {
+    try {
+      const response = await fetch(`${url}/gender`, {
+        method: "GET",
+        headers: {},
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await response.json();
+      setGenderArr(data);
+    } catch (error) {
+      console.error("Error", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchGender();
+  }, []);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -51,7 +75,7 @@ const StudentSignUp = () => {
         <SelectElement
           name="gender"
           label="Gedner"
-          options={gednerArr}
+          options={genderArr}
           helperText="Choose your gender if you want"
           control={control}
         />
