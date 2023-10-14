@@ -1,50 +1,54 @@
-import { Box, Button, TextField } from "@mui/material";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { Button, Stack, Typography } from "@mui/material";
+import { useState } from "react";
+import {
+  FormContainer,
+  PasswordElement,
+  TextFieldElement,
+} from "react-hook-form-mui";
 
-interface IFormInput {
-  fullName: string;
-  firstName: string;
-  lastName: string;
-}
+type FormProps = {
+  username: string;
+  password: string;
+};
+
 const SignInPage = () => {
-  const { register, handleSubmit } = useForm<IFormInput>();
-  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
+  const [values, setValues] = useState<FormProps>();
+  const onSubmit = (data: FormProps) => {
+    console.log(data);
+    setValues(data);
+  };
+
+  const defaultValues: FormProps = { username: "", password: "" };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: 2,
-          maxWidth: 400,
-          margin: "0 auto",
-        }}
-      >
-        <TextField
-          id="outlined-required"
-          label="Write fullname"
-          {...register("fullName", { required: true, maxLength: 30 })}
-        />
-        <TextField
+    <FormContainer defaultValues={defaultValues} onSuccess={onSubmit}>
+      <Typography textAlign="center" mb={2} variant="h4">
+        Sign In
+      </Typography>
+      <Stack direction={"column"} gap={3} maxWidth={600} margin="0 auto">
+        <TextFieldElement
+          color={"primary"}
+          name={"username"}
+          label={"Username"}
           required
-          id="outlined-required"
-          label="Write username"
-          {...register("firstName", { required: true, maxLength: 20 })}
         />
-        <TextField
-          required
-          id="outlined-password-input"
-          label="Write password"
+        <PasswordElement
+          color={"secondary"}
+          name={"password"}
+          label={"Password"}
           type="password"
-          autoComplete="current-password"
-          {...register("lastName", { pattern: /^[A-Za-z]+$/i })}
+          required
         />
-        <Button size="large" type="submit" variant="contained">
+        <Button
+          size="large"
+          type={"submit"}
+          variant={"contained"}
+          color={"primary"}
+        >
           Sign In
         </Button>
-      </Box>
-    </form>
+      </Stack>
+    </FormContainer>
   );
 };
 

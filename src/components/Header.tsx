@@ -6,7 +6,7 @@ const Header = () => (
     sx={{
       display: "flex",
       justifyContent: "space-between",
-      p: 3,
+      py: 2,
     }}
     component="header"
   >
@@ -17,7 +17,9 @@ const Header = () => (
       <Typography variant="h5">
         <NavLink to="/sign-in">Sign In</NavLink>
       </Typography>
-      <Typography sx={{ px: 1 }}>/</Typography>
+      <Typography variant="h4" sx={{ px: 1 }}>
+        /
+      </Typography>
 
       <Typography variant="h5">
         <NavLink to="/sign-up">Sign Up</NavLink>

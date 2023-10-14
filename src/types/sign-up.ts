@@ -1,8 +1,13 @@
-enum GenderEnum {
+export enum GenderEnum {
   female = "female",
   male = "male",
   other = "other",
 }
+
+export type SportType = {
+  id: string;
+  label: string;
+};
 
 export interface StudentSignUpForm {
   username: string;
@@ -13,6 +18,9 @@ export interface StudentSignUpForm {
 }
 
 export interface TrainerSignUpForm {
-  firstName: string;
+  username: string;
+  password: string;
+  fullname: string;
+  age: number;
   gender: GenderEnum;
 }
