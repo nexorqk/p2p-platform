@@ -10,8 +10,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "preview": "vite preview",
-    "server": "json-server --watch db.json -p 3004",
-    "dev:json": "concurrently \"npm run dev\" \"npm run server\""
+    "server": "json-server --watch db.json -p 3004"
   },
   "dependencies": {
     "@emotion/react": "latest",
@@ -29,7 +28,6 @@
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "@vitejs/plugin-react": "latest",
-    "concurrently": "^8.2.1",
     "gh-pages": "^6.0.0",
     "json-server": "^0.17.4",
     "typescript": "latest",

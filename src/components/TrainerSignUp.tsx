@@ -7,7 +7,8 @@ import {
 } from "react-hook-form-mui";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { GenderEnum, SelectType } from "../types/sign-up";
-import { url } from "../constants";
+import { myFetch } from "../api/apiHelper";
+import { SPORT_TYPES } from "../api/endpoints";
 
 type FormProps = {
   username: string;
@@ -41,7 +42,7 @@ const TrainerSignUp = () => {
 
   const fetchGender = async () => {
     try {
-      const response = await fetch(`${url}/gender`, {
+      const response = await myFetch("gender", {
         method: "GET",
         headers: {},
       });
@@ -58,7 +59,7 @@ const TrainerSignUp = () => {
   };
   const fetchSportTypesArr = async () => {
     try {
-      const response = await fetch(`${url}/sportTypesArr`, {
+      const response = await myFetch(SPORT_TYPES, {
         method: "GET",
         headers: {},
       });
@@ -75,7 +76,7 @@ const TrainerSignUp = () => {
   };
   const fetchSpecificSport = async () => {
     try {
-      const response = await fetch(`${url}/specificSport`, {
+      const response = await myFetch("specificSport", {
         method: "GET",
         headers: {},
       });

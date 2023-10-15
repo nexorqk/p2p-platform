@@ -3,7 +3,7 @@ import { Button, Stack, TextField } from "@mui/material";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { SelectType, StudentSignUpForm } from "../types/sign-up";
 import { SelectElement } from "react-hook-form-mui";
-import { url } from "../constants";
+import { myFetch } from "../api/apiHelper";
 
 const StudentSignUp = () => {
   const [genderArr, setGenderArr] = useState<SelectType[]>([]);
@@ -18,7 +18,7 @@ const StudentSignUp = () => {
 
   const fetchGender = async () => {
     try {
-      const response = await fetch(`${url}/gender`, {
+      const response = await myFetch("gender", {
         method: "GET",
         headers: {},
       });
