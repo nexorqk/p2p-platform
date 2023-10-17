@@ -3,7 +3,7 @@ import { Button, Stack, TextField } from "@mui/material";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { SelectType, StudentSignUpForm } from "../types/sign-up";
 import { SelectElement } from "react-hook-form-mui";
-import { myFetch } from "../api/apiHelper";
+import { getRequest } from "../api/apiHelper";
 
 const StudentSignUp = () => {
   const [genderArr, setGenderArr] = useState<SelectType[]>([]);
@@ -18,22 +18,12 @@ const StudentSignUp = () => {
 
   const fetchGender = async () => {
     try {
-      const response = await myFetch("gender", {
-        method: "GET",
-        headers: {},
-      });
-
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      const data = await response.json();
-      setGenderArr(data);
+      const response = await getRequest("gender");
+      setGenderArr(response.data);
     } catch (error) {
-      console.error("Error", error);
+      console.error(error);
     }
   };
-
   useEffect(() => {
     fetchGender();
   }, []);

@@ -6,9 +6,8 @@ import {
   SelectElement,
 } from "react-hook-form-mui";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { GenderEnum, SelectType } from "../types/sign-up";
-import { myFetch } from "../api/apiHelper";
-import { SPORT_TYPES } from "../api/endpoints";
+import { endpoints, getRequest } from "../api";
+import { GenderEnum, SelectType } from "../types";
 
 type FormProps = {
   username: string;
@@ -42,53 +41,27 @@ const TrainerSignUp = () => {
 
   const fetchGender = async () => {
     try {
-      const response = await myFetch("gender", {
-        method: "GET",
-        headers: {},
-      });
-
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      const data = await response.json();
-      setGenderArr(data);
+      const response = await getRequest(endpoints.GENDER);
+      setGenderArr(response.data);
     } catch (error) {
-      console.error("Error", error);
+      console.error(error);
     }
   };
   const fetchSportTypesArr = async () => {
     try {
-      const response = await myFetch(SPORT_TYPES, {
-        method: "GET",
-        headers: {},
-      });
-
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      const data = await response.json();
-      setSportTypesArr(data);
+      const response = await getRequest(endpoints.SPORT_TYPES);
+      console.log(response.data);
+      setSportTypesArr(response.data);
     } catch (error) {
-      console.error("Error", error);
+      console.error(error);
     }
   };
   const fetchSpecificSport = async () => {
     try {
-      const response = await myFetch("specificSport", {
-        method: "GET",
-        headers: {},
-      });
-
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      const data = await response.json();
-      setSpecificSport(data);
+      const response = await getRequest(endpoints.SPECIFIC_SPORT);
+      setSpecificSport(response.data);
     } catch (error) {
-      console.error("Error", error);
+      console.error(error);
     }
   };
   useEffect(() => {

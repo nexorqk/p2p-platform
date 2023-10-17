@@ -1,5 +1,6 @@
+import axios from "axios";
 import { baseUrl } from "../constants";
 
-export const myFetch = (method: string, obj: any) => {
-  return fetch(`${baseUrl}/${method}`, obj);
+export const getRequest = (method: string, obj?: any) => {
+  return axios.get(`${baseUrl}/${method}`, obj);
 };
