@@ -3,7 +3,7 @@ import { Button, Stack, TextField } from "@mui/material";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { SelectType, StudentSignUpForm } from "../types/sign-up";
 import { SelectElement } from "react-hook-form-mui";
-import { getRequest } from "../api/apiHelper";
+import { commonApi, endpoints } from "../api";
 
 const StudentSignUp = () => {
   const [genderArr, setGenderArr] = useState<SelectType[]>([]);
@@ -18,7 +18,7 @@ const StudentSignUp = () => {
 
   const fetchGender = async () => {
     try {
-      const response = await getRequest("gender");
+      const response = await commonApi(endpoints.GENDER);
       setGenderArr(response.data);
     } catch (error) {
       console.error(error);
