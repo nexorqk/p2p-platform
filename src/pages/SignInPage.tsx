@@ -1,10 +1,13 @@
 import { Button, Stack, Typography } from "@mui/material";
 import { useState } from "react";
 import {
+  FieldError,
   FormContainer,
   PasswordElement,
   TextFieldElement,
 } from "react-hook-form-mui";
+import { passwordRegEx, validationErrors } from "../constants";
+import { commonApi, endpoints } from "../api";
 
 type FormProps = {
   username: string;
@@ -12,13 +15,29 @@ type FormProps = {
 };
 
 const SignInPage = () => {
+  const [isAuth, setIsAuth] = useState(false);
   const [values, setValues] = useState<FormProps>();
   const onSubmit = (data: FormProps) => {
     console.log(data);
     setValues(data);
+
+    handleSignIn(values);
   };
 
   const defaultValues: FormProps = { username: "", password: "" };
+
+  const handleError = (error: FieldError) => {
+    switch (error.type) {
+      case "minLength":
+        return validationErrors.minLength;
+      case "pattern":
+        return validationErrors.passwordPattern;
+    }
+  };
+
+  const handleSignIn = async (userData: FormProps | undefined) => {
+    const response = commonApi.get(endpoints.GET_USER, {});
+  };
 
   return (
     <FormContainer defaultValues={defaultValues} onSuccess={onSubmit}>
@@ -31,6 +50,8 @@ const SignInPage = () => {
           name={"username"}
           label={"Username"}
           required
+          validation={{ minLength: 4 }}
+          parseError={handleError}
         />
         <PasswordElement
           color={"secondary"}
@@ -38,6 +59,8 @@ const SignInPage = () => {
           label={"Password"}
           type="password"
           required
+          validation={{ minLength: 8, pattern: passwordRegEx }}
+          parseError={handleError}
         />
         <Button
           size="large"
