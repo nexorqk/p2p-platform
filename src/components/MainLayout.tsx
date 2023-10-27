@@ -3,20 +3,20 @@ import { Outlet } from "react-router-dom";
 import Header from "./Header";
 
 const MainLayout = () => (
-  <>
+  <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
     <Header />
-    <Container
-      component="main"
-      sx={{ minHeight: "calc(100vh - 142px)", py: 4 }}
-    >
+    <Container component="main" sx={{ py: 4 }}>
       <Outlet />
     </Container>
-    <Box component="footer" sx={{ p: 3, background: "#f5f5f5" }}>
+    <Box
+      component="footer"
+      sx={{ mt: "auto", p: 3, background: (theme) => theme.palette.grey[200] }}
+    >
       <Typography variant="body2" align="center">
         © 2023, Alexander Alexeichik
       </Typography>
     </Box>
-  </>
+  </Box>
 );
 
 export default MainLayout;

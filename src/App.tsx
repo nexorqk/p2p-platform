@@ -4,12 +4,14 @@ import SignUpPage from "./pages/SignUpPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import SignInPage from "./pages/SignInPage";
 import MainLayout from "./components/MainLayout";
+import TrainersPage from "./pages/TrainersPage";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<MainLayout />}>
         <Route index element={<WelcomePage />} />
+        <Route path="/trainers" element={<TrainersPage />} />
         <Route path="sign-in" element={<SignInPage />} />
         <Route path="sign-up" element={<SignUpPage />} />
         <Route path="*" element={<NotFoundPage />} />

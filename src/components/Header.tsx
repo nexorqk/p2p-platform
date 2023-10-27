@@ -13,6 +13,9 @@ const Header = () => (
     <Typography variant="h4" component="h1">
       <NavLink to="/">Music Platform</NavLink>
     </Typography>
+    <Typography variant="h5">
+      <NavLink to="/trainers">Trainers</NavLink>
+    </Typography>
     <Box sx={{ display: "flex", alignItems: "center" }}>
       <Typography variant="h5">
         <NavLink to="/sign-in">Sign In</NavLink>
