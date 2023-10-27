@@ -1,10 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Stack, TextField } from "@mui/material";
-import {
-  MultiSelectElement,
-  PasswordElement,
-  SelectElement,
-} from "react-hook-form-mui";
+import { Button, Select, Stack, TextField } from "@mui/material";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { commonApi, endpoints } from "../api";
 import { GenderEnum, SelectType } from "../types";
@@ -92,13 +87,12 @@ const TrainerSignUp = () => {
           helperText={errors.username ? errors.username.message : null}
           {...register("username")}
         />
-        <PasswordElement
+        <TextField
           required
           color={"secondary"}
           label="Password"
           type="password"
           name="password"
-          control={control}
         />
         <TextField
           error={!!errors.fullname}
@@ -115,27 +109,16 @@ const TrainerSignUp = () => {
           helperText={errors.age ? "Too young" : null}
           {...register("age", { min: 18, max: 130 })}
         />
-        <SelectElement
-          name="gender"
-          label="Gedner"
-          options={gednerArr}
-          helperText="Choose your gender if you want"
-          control={control}
-        />
-        <SelectElement
-          label="Sport type"
-          name="sport"
-          options={sportTypesArr}
-          control={control}
-          required
-        />
-        <MultiSelectElement
-          name="specific_sport"
-          label="Specific Sport"
-          options={specificValue}
-          control={control}
-          required
-        />
+        <Select name="gender" label="Gedner">
+          {/* {gednerArr?.map()} */}
+        </Select>
+        <Select label="Sport type" name="sport" required>
+          {/* {sportTypesArr} */}
+        </Select>
+        <Select name="specific_sport" label="Specific Sport" required>
+          {/* Multi Select */}
+          {/* specificValue */}
+        </Select>
         <Button
           size="large"
           type={"submit"}

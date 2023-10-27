@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { Button, Stack, TextField } from "@mui/material";
+import { Button, Select, Stack, TextField } from "@mui/material";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { SelectType, StudentSignUpForm } from "../types/sign-up";
-import { SelectElement } from "react-hook-form-mui";
 import { commonApi, endpoints } from "../api";
 
 const StudentSignUp = () => {
@@ -62,13 +61,9 @@ const StudentSignUp = () => {
           helperText={errors.age ? "Too young" : null}
           {...register("age", { min: 18, max: 130 })}
         />
-        <SelectElement
-          name="gender"
-          label="Gedner"
-          options={genderArr}
-          helperText="Choose your gender if you want"
-          control={control}
-        />
+        <Select name="gender" label="Gedner">
+          {/* options={genderArr} */}
+        </Select>
         <Button size="large" type="submit" variant="contained">
           Submit
         </Button>
