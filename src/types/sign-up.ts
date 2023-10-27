@@ -21,6 +21,8 @@ export interface TrainerSignUpForm {
   username: string;
   password: string;
   fullname: string;
-  age: number;
-  gender: GenderEnum;
+  age: number | undefined;
+  gender: GenderEnum | "";
+  sport: string;
+  specific_sport: SelectType[];
 }

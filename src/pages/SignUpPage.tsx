@@ -4,7 +4,7 @@ import TrainerSignUp from "../components/TrainerSignUp";
 import StudentSignUp from "../components/StudentSignUp";
 
 const SignUpPage = () => {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(1);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);

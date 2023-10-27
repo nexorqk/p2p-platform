@@ -1,19 +1,39 @@
 import { useEffect, useState } from "react";
-import { Button, Select, Stack, TextField } from "@mui/material";
+import {
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  Stack,
+  TextField,
+} from "@mui/material";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { SelectType, StudentSignUpForm } from "../types/sign-up";
 import { commonApi, endpoints } from "../api";
+import { passwordRegEx, usernameRegEx, validationErrors } from "../constants";
 
 const StudentSignUp = () => {
+  const [gender, setGender] = useState("");
   const [genderArr, setGenderArr] = useState<SelectType[]>([]);
   const {
     register,
     handleSubmit,
-    control,
     formState: { errors },
-  } = useForm<StudentSignUpForm>();
+  } = useForm<StudentSignUpForm>({
+    defaultValues: {
+      username: "",
+      password: "",
+      fullname: "",
+    },
+  });
   const onSubmit: SubmitHandler<StudentSignUpForm> = (data) =>
     console.log(data);
+
+  const handleGenderSelect = (event: SelectChangeEvent) => {
+    setGender(event.target.value as string);
+  };
 
   const fetchGender = async () => {
     try {
@@ -35,35 +55,49 @@ const StudentSignUp = () => {
           error={!!errors.username}
           label="Username"
           type="text"
-          helperText={errors.username ? errors.username.message : null}
-          {...register("username")}
+          helperText={errors.username ? validationErrors.common : null}
+          {...register("username", { pattern: usernameRegEx })}
         />
         <TextField
           required
+          color="secondary"
           error={!!errors.password}
           label="Password"
           type="password"
-          helperText={errors.password ? errors.password.message : null}
-          {...register("password")}
+          helperText={errors.password ? validationErrors.passwordPattern : null}
+          {...register("password", { pattern: passwordRegEx })}
         />
         <TextField
           error={!!errors.fullname}
           label="Fullname"
           type="text"
-          helperText={errors.fullname ? errors.fullname.message : null}
-          {...register("fullname")}
+          helperText={errors.fullname ? validationErrors.common : null}
+          {...register("fullname", { pattern: usernameRegEx })}
         />
         <TextField
           label="Write your age"
           type="number"
           size="small"
           error={!!errors.age}
-          helperText={errors.age ? "Too young" : null}
-          {...register("age", { min: 18, max: 130 })}
+          helperText={errors.age ? validationErrors.tooYoung : null}
+          {...register("age", { min: 18, max: 99 })}
         />
-        <Select name="gender" label="Gedner">
-          {/* options={genderArr} */}
-        </Select>
+        <FormControl fullWidth>
+          <InputLabel id="gender-select-label">Gender</InputLabel>
+          <Select
+            labelId="gender-select-label"
+            id="gender-select"
+            value={gender}
+            label="Age"
+            onChange={handleGenderSelect}
+          >
+            {genderArr.map((gender) => (
+              <MenuItem key={gender.id} value={gender.id}>
+                {gender.label}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
         <Button size="large" type="submit" variant="contained">
           Submit
         </Button>

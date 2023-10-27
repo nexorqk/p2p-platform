@@ -1,5 +1,5 @@
 {
-  "name": "material-ui-vite-ts",
+  "name": "p2p-platform",
   "private": true,
   "version": "5.0.0",
   "type": "module",
@@ -17,7 +17,6 @@
     "@emotion/styled": "latest",
     "@mui/icons-material": "^5.14.11",
     "@mui/material": "latest",
-    "@mui/x-date-pickers": "^6.16.0",
     "axios": "^1.5.1",
     "react": "latest",
     "react-dom": "latest",

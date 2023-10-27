@@ -1,6 +1,6 @@
 import { Button, Stack, TextField, Typography } from "@mui/material";
 import { useState } from "react";
-import { passwordRegEx, validationErrors } from "../constants";
+import { passwordRegEx, usernameRegEx, validationErrors } from "../constants";
 import { commonApi, endpoints } from "../api";
 import { SubmitHandler, useForm } from "react-hook-form";
 
@@ -12,16 +12,12 @@ type FormProps = {
 const SignInPage = () => {
   const [isAuth, setIsAuth] = useState(false);
   const [values, setValues] = useState<FormProps>();
-
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<FormProps>();
   const onSubmit: SubmitHandler<FormProps> = (data) => console.log(data);
-
-  const defaultValues: FormProps = { username: "", password: "" };
 
   const handleSignIn = async (userData: FormProps | undefined) => {
     const response = commonApi.get(endpoints.GET_USER, {});
@@ -34,18 +30,21 @@ const SignInPage = () => {
       </Typography>
       <Stack direction={"column"} gap={3} maxWidth={600} margin="0 auto">
         <TextField
-          color="primary"
-          id="username"
-          label="Username"
           required
-          {...register("username")}
+          error={!!errors.username}
+          label="Username"
+          type="text"
+          helperText={errors.username ? validationErrors.common : null}
+          {...register("username", { pattern: usernameRegEx })}
         />
         <TextField
           color="secondary"
+          required
+          error={!!errors.password}
           label="Password"
           type="password"
-          required
-          {...register("password")}
+          helperText={errors.password ? validationErrors.passwordPattern : null}
+          {...register("password", { pattern: passwordRegEx })}
         />
         <Button size="large" type="submit" variant="contained" color="primary">
           Sign In
