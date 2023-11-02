@@ -1,5 +1,5 @@
 import { Button, Stack, TextField, Typography } from "@mui/material";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { passwordRegEx, usernameRegEx, validationErrors } from "../constants";
 import { commonApi, endpoints } from "../api";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -17,10 +17,13 @@ const SignInPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormProps>();
-  const onSubmit: SubmitHandler<FormProps> = (data) => console.log(data);
-
-  const handleSignIn = async (userData: FormProps | undefined) => {
-    const response = commonApi.get(endpoints.GET_USER, {});
+  const onSubmit: SubmitHandler<FormProps> = (data) => {
+    console.log(data);
+    setValues(data);
+    const response = commonApi.get(endpoints.GET_USER, {
+      params: { value: values },
+    });
+    console.log(response);
   };
 
   return (
