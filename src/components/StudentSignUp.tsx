@@ -9,16 +9,22 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { SelectType, StudentSignUpForm } from "../types/sign-up";
-import { commonApi, endpoints } from "../api";
-import { passwordRegEx, usernameRegEx, validationErrors } from "../constants";
+import { baseApi, endpoints } from "../api";
+import {
+  fullnameRegEx,
+  passwordRegEx,
+  usernameRegEx,
+  validationErrors,
+} from "../constants";
 
 const StudentSignUp = () => {
   const [gender, setGender] = useState("");
   const [genderArr, setGenderArr] = useState<SelectType[]>([]);
   const {
-    register,
+    reset,
+    control,
     handleSubmit,
     formState: { errors },
   } = useForm<StudentSignUpForm>({
@@ -26,6 +32,8 @@ const StudentSignUp = () => {
       username: "",
       password: "",
       fullname: "",
+      age: "",
+      gender: "",
     },
   });
   const onSubmit: SubmitHandler<StudentSignUpForm> = (data) =>
@@ -37,7 +45,7 @@ const StudentSignUp = () => {
 
   const fetchGender = async () => {
     try {
-      const response = await commonApi(endpoints.GENDER);
+      const response = await baseApi(endpoints.GENDER);
       setGenderArr(response.data);
     } catch (error) {
       console.error(error);
@@ -50,56 +58,127 @@ const StudentSignUp = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={3} maxWidth={600} margin="0 auto">
-        <TextField
-          required
-          error={!!errors.username}
-          label="Username"
-          type="text"
-          helperText={errors.username ? validationErrors.common : null}
-          {...register("username", { pattern: usernameRegEx })}
+        <Controller
+          control={control}
+          name="username"
+          rules={{
+            required: true,
+            pattern: usernameRegEx,
+          }}
+          render={({
+            field: { onChange, value },
+            fieldState: { error },
+            formState,
+          }) => (
+            <TextField
+              onChange={onChange}
+              value={value}
+              error={!!error}
+              label="Username"
+              type="text"
+              helperText={error ? validationErrors.usernameError : null}
+            />
+          )}
         />
-        <TextField
-          required
-          color="secondary"
-          error={!!errors.password}
-          label="Password"
-          type="password"
-          helperText={errors.password ? validationErrors.passwordPattern : null}
-          {...register("password", { pattern: passwordRegEx })}
+        <Controller
+          control={control}
+          name="password"
+          rules={{
+            required: true,
+            pattern: passwordRegEx,
+          }}
+          render={({
+            field: { onChange, value },
+            fieldState: { error },
+            formState,
+          }) => (
+            <TextField
+              color="secondary"
+              onChange={onChange}
+              value={value}
+              error={!!error}
+              label="Password"
+              type="password"
+              helperText={error ? validationErrors.passwordPattern : null}
+            />
+          )}
         />
-        <TextField
-          error={!!errors.fullname}
-          label="Fullname"
-          type="text"
-          helperText={errors.fullname ? validationErrors.common : null}
-          {...register("fullname", { pattern: usernameRegEx })}
+        <Controller
+          control={control}
+          name="fullname"
+          rules={{
+            pattern: fullnameRegEx,
+          }}
+          render={({
+            field: { onChange, value },
+            fieldState: { error },
+            formState,
+          }) => (
+            <TextField
+              onChange={onChange}
+              value={value}
+              error={!!error}
+              label="Fullname"
+              type="text"
+              helperText={error ? validationErrors.fullnameError : null}
+            />
+          )}
         />
-        <TextField
-          label="Write your age"
-          type="number"
-          size="small"
-          error={!!errors.age}
-          helperText={errors.age ? validationErrors.tooYoung : null}
-          {...register("age", { min: 18, max: 99 })}
+        <Controller
+          control={control}
+          name="age"
+          rules={{
+            min: 18,
+            max: 99,
+          }}
+          render={({
+            field: { onChange, value },
+            fieldState: { error },
+            formState,
+          }) => (
+            <TextField
+              onChange={onChange}
+              value={value}
+              error={!!error}
+              label="Write your age"
+              type="number"
+              helperText={error ? validationErrors.tooYoung : null}
+            />
+          )}
         />
-        <FormControl fullWidth>
-          <InputLabel id="gender-select-label">Gender</InputLabel>
-          <Select
-            labelId="gender-select-label"
-            id="gender-select"
-            value={gender}
-            label="Age"
-            onChange={handleGenderSelect}
-          >
-            {genderArr.map((gender) => (
-              <MenuItem key={gender.id} value={gender.id}>
-                {gender.label}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+
+        <Controller
+          control={control}
+          name="gender"
+          render={({
+            field: { onChange, value },
+            fieldState: { error },
+            formState,
+          }) => (
+            <FormControl fullWidth>
+              <InputLabel id="gender-select-label">Gender</InputLabel>
+              <Select
+                labelId="gender-select-label"
+                id="gender-select"
+                value={value}
+                label="Gender"
+                onChange={onChange}
+              >
+                {genderArr.map((gender) => (
+                  <MenuItem key={gender.id} value={gender.id}>
+                    {gender.label}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          )}
+        />
+
         <Button size="large" type="submit" variant="contained">
           Submit
+        </Button>
+        <Button onClick={() => reset()} variant="outlined">
+          Reset
         </Button>
       </Stack>
     </form>

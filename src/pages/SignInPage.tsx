@@ -1,29 +1,28 @@
 import { Button, Stack, TextField, Typography } from "@mui/material";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import { passwordRegEx, usernameRegEx, validationErrors } from "../constants";
-import { commonApi, endpoints } from "../api";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { baseApi, endpoints } from "../api";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 
-type FormProps = {
+interface IFormProps {
   username: string;
   password: string;
+}
+
+const defaultValues = {
+  username: "",
+  password: "",
 };
 
 const SignInPage = () => {
-  const [isAuth, setIsAuth] = useState(false);
-  const [values, setValues] = useState<FormProps>();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormProps>();
-  const onSubmit: SubmitHandler<FormProps> = (data) => {
-    console.log(data);
+  const [values, setValues] = useState<IFormProps>();
+  const { handleSubmit, reset, control, setValue } = useForm<IFormProps>({
+    defaultValues: defaultValues,
+  });
+
+  const onSubmit: SubmitHandler<IFormProps> = (data) => {
     setValues(data);
-    const response = commonApi.get(endpoints.GET_USER, {
-      params: { value: values },
-    });
-    console.log(response);
+    console.log(values);
   };
 
   return (
@@ -32,25 +31,56 @@ const SignInPage = () => {
         Sign In
       </Typography>
       <Stack direction={"column"} gap={3} maxWidth={600} margin="0 auto">
-        <TextField
-          required
-          error={!!errors.username}
-          label="Username"
-          type="text"
-          helperText={errors.username ? validationErrors.common : null}
-          {...register("username", { pattern: usernameRegEx })}
+        <Controller
+          control={control}
+          name="username"
+          rules={{
+            required: true,
+            pattern: usernameRegEx,
+          }}
+          render={({
+            field: { onChange, value },
+            fieldState: { error },
+            formState,
+          }) => (
+            <TextField
+              onChange={onChange}
+              value={value}
+              error={!!error}
+              label="Username"
+              type="text"
+              helperText={error ? validationErrors.usernameError : null}
+            />
+          )}
         />
-        <TextField
-          color="secondary"
-          required
-          error={!!errors.password}
-          label="Password"
-          type="password"
-          helperText={errors.password ? validationErrors.passwordPattern : null}
-          {...register("password", { pattern: passwordRegEx })}
+        <Controller
+          control={control}
+          name="password"
+          rules={{
+            required: true,
+            pattern: passwordRegEx,
+          }}
+          render={({
+            field: { onChange, value },
+            fieldState: { error },
+            formState,
+          }) => (
+            <TextField
+              color="secondary"
+              onChange={onChange}
+              value={value}
+              error={!!error}
+              label="Password"
+              type="password"
+              helperText={error ? validationErrors.passwordPattern : null}
+            />
+          )}
         />
-        <Button size="large" type="submit" variant="contained" color="primary">
+        <Button type="submit" size="large" variant="contained" color="primary">
           Sign In
+        </Button>
+        <Button onClick={() => reset()} variant={"outlined"}>
+          Reset
         </Button>
       </Stack>
     </form>

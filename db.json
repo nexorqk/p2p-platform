@@ -373,5 +373,10 @@
       ]
     }
   ],
-  "getUser": [{ "username": "nexorqk", "password": "dsgggggg#215%F" }]
+  "getUser": [
+    {
+      "username": "nexorqk",
+      "password": "dsgggggg#215%F"
+    }
+  ]
 }

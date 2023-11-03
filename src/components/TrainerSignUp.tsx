@@ -10,7 +10,7 @@ import {
   TextField,
 } from "@mui/material";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { commonApi, endpoints } from "../api";
+import { baseApi, endpoints } from "../api";
 import { SelectType, TrainerSignUpForm } from "../types";
 import { passwordRegEx, usernameRegEx, validationErrors } from "../constants";
 import MultiSelectElement from "./MultiSelectElement";
@@ -43,7 +43,7 @@ const TrainerSignUp = () => {
   };
   const fetchGender = async () => {
     try {
-      const response = await commonApi(endpoints.GENDER);
+      const response = await baseApi(endpoints.GENDER);
       setGenderArr(response.data);
     } catch (error) {
       console.error(error);
@@ -54,7 +54,7 @@ const TrainerSignUp = () => {
   };
   const fetchSportTypesArr = async () => {
     try {
-      const response = await commonApi(endpoints.SPORT_TYPES);
+      const response = await baseApi(endpoints.SPORT_TYPES);
       setSportTypesArr(response.data);
     } catch (error) {
       console.error(error);
@@ -62,7 +62,7 @@ const TrainerSignUp = () => {
   };
   const fetchSpecificSport = async () => {
     try {
-      const response = await commonApi(endpoints.SPECIFIC_SPORT);
+      const response = await baseApi(endpoints.SPECIFIC_SPORT);
       setSpecificSport(response.data);
     } catch (error) {
       console.error(error);
