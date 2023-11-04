@@ -38,11 +38,7 @@ const SignInPage = () => {
             required: true,
             pattern: usernameRegEx,
           }}
-          render={({
-            field: { onChange, value },
-            fieldState: { error },
-            formState,
-          }) => (
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
             <TextField
               onChange={onChange}
               value={value}
@@ -60,11 +56,7 @@ const SignInPage = () => {
             required: true,
             pattern: passwordRegEx,
           }}
-          render={({
-            field: { onChange, value },
-            fieldState: { error },
-            formState,
-          }) => (
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
             <TextField
               color="secondary"
               onChange={onChange}

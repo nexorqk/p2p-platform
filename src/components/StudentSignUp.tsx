@@ -5,7 +5,6 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  SelectChangeEvent,
   Stack,
   TextField,
 } from "@mui/material";
@@ -18,9 +17,12 @@ import {
   usernameRegEx,
   validationErrors,
 } from "../constants";
+import { useNavigate } from "react-router-dom";
 
 const StudentSignUp = () => {
-  const [gender, setGender] = useState("");
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const [values, setValues] = useState<StudentSignUpForm>();
   const [genderArr, setGenderArr] = useState<SelectType[]>([]);
   const {
     reset,
@@ -36,11 +38,8 @@ const StudentSignUp = () => {
       gender: "",
     },
   });
-  const onSubmit: SubmitHandler<StudentSignUpForm> = (data) =>
-    console.log(data);
-
-  const handleGenderSelect = (event: SelectChangeEvent) => {
-    setGender(event.target.value as string);
+  const onSubmit: SubmitHandler<StudentSignUpForm> = (data) => {
+    setValues(data);
   };
 
   const fetchGender = async () => {
@@ -55,6 +54,26 @@ const StudentSignUp = () => {
     fetchGender();
   }, []);
 
+  const signUp = async () => {
+    try {
+      setIsLoading(true);
+      const response = await baseApi.post("sign-up", values, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      if (!response?.data?.token) {
+        console.log("Something went wrong during signing up: ", response);
+        return;
+      }
+      // navigate(APP_ROUTES.SIGN_IN);
+    } catch (err) {
+      console.log("Some error occured during signing up: ", err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={3} maxWidth={600} margin="0 auto">
@@ -65,11 +84,7 @@ const StudentSignUp = () => {
             required: true,
             pattern: usernameRegEx,
           }}
-          render={({
-            field: { onChange, value },
-            fieldState: { error },
-            formState,
-          }) => (
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
             <TextField
               onChange={onChange}
               value={value}
@@ -87,11 +102,7 @@ const StudentSignUp = () => {
             required: true,
             pattern: passwordRegEx,
           }}
-          render={({
-            field: { onChange, value },
-            fieldState: { error },
-            formState,
-          }) => (
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
             <TextField
               color="secondary"
               onChange={onChange}
@@ -109,11 +120,7 @@ const StudentSignUp = () => {
           rules={{
             pattern: fullnameRegEx,
           }}
-          render={({
-            field: { onChange, value },
-            fieldState: { error },
-            formState,
-          }) => (
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
             <TextField
               onChange={onChange}
               value={value}
@@ -131,11 +138,7 @@ const StudentSignUp = () => {
             min: 18,
             max: 99,
           }}
-          render={({
-            field: { onChange, value },
-            fieldState: { error },
-            formState,
-          }) => (
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
             <TextField
               onChange={onChange}
               value={value}
