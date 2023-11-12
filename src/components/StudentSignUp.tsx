@@ -81,7 +81,6 @@ const StudentSignUp = () => {
           control={control}
           name="username"
           rules={{
-            required: true,
             pattern: usernameRegEx,
           }}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
@@ -91,6 +90,7 @@ const StudentSignUp = () => {
               error={!!error}
               label="Username"
               type="text"
+              required
               helperText={error ? validationErrors.usernameError : null}
             />
           )}
@@ -99,7 +99,6 @@ const StudentSignUp = () => {
           control={control}
           name="password"
           rules={{
-            required: true,
             pattern: passwordRegEx,
           }}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
@@ -110,6 +109,7 @@ const StudentSignUp = () => {
               error={!!error}
               label="Password"
               type="password"
+              required
               helperText={error ? validationErrors.passwordPattern : null}
             />
           )}
