@@ -1,7 +1,5 @@
-import { useEffect, useState } from "react";
 import {
   Button,
-  Container,
   FormControl,
   InputLabel,
   MenuItem,
@@ -14,19 +12,16 @@ import { useNavigate } from "react-router-dom";
 
 import { SelectType, StudentSignUpForm } from "../types/sign-up";
 import { baseApi, endpoints } from "../api";
-import { emailRegEx, fullnameRegEx, inputErrors } from "../constants";
+import {
+  emailRegEx,
+  fullnameRegEx,
+  genderArr,
+  inputErrors,
+} from "../constants";
 
 export const StudentSignUp = () => {
   // const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
-  const [values, setValues] = useState<StudentSignUpForm>();
-  const [genderArr, setGenderArr] = useState<SelectType[]>([]);
-  const {
-    reset,
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<StudentSignUpForm>({
+  const { reset, control, handleSubmit } = useForm<StudentSignUpForm>({
     defaultValues: {
       email: "",
       password: "",
@@ -35,21 +30,8 @@ export const StudentSignUp = () => {
       gender: "",
     },
   });
-  const onSubmit: SubmitHandler<StudentSignUpForm> = (data) => {
-    setValues(data);
-  };
-
-  const fetchGender = async () => {
-    try {
-      const response = await baseApi(endpoints.GENDER);
-      setGenderArr(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  useEffect(() => {
-    fetchGender();
-  }, []);
+  const onSubmit: SubmitHandler<StudentSignUpForm> = (data) =>
+    console.log(data);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -65,8 +47,8 @@ export const StudentSignUp = () => {
               onChange={onChange}
               value={value}
               error={!!error}
-              label="Username"
-              type="text"
+              label="Email"
+              type="email"
               required
               helperText={error ? inputErrors.emailError : null}
             />
@@ -85,6 +67,7 @@ export const StudentSignUp = () => {
               error={!!error}
               label="Password"
               type="password"
+              autoComplete="current-password"
               required
               helperText={error ? inputErrors.passwordPattern : null}
             />

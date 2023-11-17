@@ -1,18 +1,4 @@
 {
-  "gender": [
-    {
-      "id": "man",
-      "label": "Man"
-    },
-    {
-      "id": "female",
-      "label": "Female"
-    },
-    {
-      "id": "other",
-      "label": "Other"
-    }
-  ],
   "sportTypesArr": [
     {
       "id": "wrestling",
@@ -371,12 +357,6 @@
           "label": "Спортивный туризм"
         }
       ]
-    }
-  ],
-  "getUser": [
-    {
-      "username": "nexorqk",
-      "password": "dsgggggg#215%F"
     }
   ]
 }

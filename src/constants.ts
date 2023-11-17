@@ -1,3 +1,5 @@
+import { SelectType } from "./types";
+
 export const emailRegEx = new RegExp(
   /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
 );
@@ -13,3 +15,18 @@ export const inputErrors = {
   common: "Incorrect value",
   tooYoung: "Too young or too old",
 };
+
+export const genderArr: SelectType[] = [
+  {
+    id: "man",
+    label: "Man",
+  },
+  {
+    id: "female",
+    label: "Female",
+  },
+  {
+    id: "other",
+    label: "Other",
+  },
+];
