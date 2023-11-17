@@ -1,7 +1,7 @@
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { Button, Stack, TextField, Typography } from "@mui/material";
+import { Button, Container, Stack, TextField, Typography } from "@mui/material";
 import { useState } from "react";
-import { passwordRegEx, usernameRegEx, validationErrors } from "../constants";
+import { emailRegEx, inputErrors } from "../constants";
 import { baseApi, endpoints } from "../api";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 
@@ -40,54 +40,56 @@ export const SignInPage = () => {
   //   });
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Typography textAlign="center" mb={2} variant="h4">
-        Sign In
-      </Typography>
-      <Stack direction={"column"} gap={3} maxWidth={600} margin="0 auto">
-        <Controller
-          control={control}
-          name="username"
-          rules={{
-            pattern: usernameRegEx,
-          }}
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField
-              onChange={onChange}
-              value={value}
-              error={!!error}
-              label="Username"
-              type="text"
-              required
-              helperText={error ? validationErrors.usernameError : null}
-            />
-          )}
-        />
-        <Controller
-          control={control}
-          name="password"
-          rules={{
-            pattern: passwordRegEx,
-          }}
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField
-              onChange={onChange}
-              value={value}
-              error={!!error}
-              label="Password"
-              type="password"
-              required
-              helperText={error ? validationErrors.passwordPattern : null}
-            />
-          )}
-        />
-        <Button type="submit" variant="contained">
-          Sign In
-        </Button>
-        <Button onClick={() => reset()} variant="outlined">
-          Reset
-        </Button>
-      </Stack>
-    </form>
+    <Container maxWidth="xs">
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Stack direction="column" spacing={2}>
+          <Typography textAlign="center" variant="h4">
+            Sign In
+          </Typography>
+          <Controller
+            control={control}
+            name="username"
+            rules={{
+              pattern: emailRegEx,
+            }}
+            render={({ field: { onChange, value }, fieldState: { error } }) => (
+              <TextField
+                onChange={onChange}
+                value={value}
+                error={!!error}
+                label="Username"
+                type="text"
+                required
+                helperText={error ? inputErrors.emailError : null}
+              />
+            )}
+          />
+          <Controller
+            control={control}
+            name="password"
+            rules={{
+              minLength: 4,
+            }}
+            render={({ field: { onChange, value }, fieldState: { error } }) => (
+              <TextField
+                onChange={onChange}
+                value={value}
+                error={!!error}
+                label="Password"
+                type="password"
+                required
+                helperText={error ? inputErrors.passwordPattern : null}
+              />
+            )}
+          />
+          <Button type="submit" variant="contained">
+            Sign In
+          </Button>
+          <Button onClick={() => reset()} variant="outlined">
+            Reset
+          </Button>
+        </Stack>
+      </form>
+    </Container>
   );
 };

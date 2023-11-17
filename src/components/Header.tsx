@@ -4,6 +4,7 @@ import {
   Breadcrumbs,
   Container,
   Divider,
+  Stack,
   Typography,
 } from "@mui/material";
 
@@ -15,17 +16,20 @@ export const Header = () => (
       py: 2,
     }}
     component="header"
+    maxWidth="lg"
   >
-    <Typography variant="h4" component="h1" marginRight="auto">
+    <Typography variant="h4" component="h1">
       <NavLink to="/">Music Platform</NavLink>
     </Typography>
-    <Breadcrumbs
+    <Stack
+      divider={<Divider orientation="vertical" flexItem />}
+      direction="row"
+      spacing={2}
       sx={{
-        margin: "5px 80px 0 0",
         border: "1px solid black",
-        borderRadius: 4,
-        p: 1,
-        display: "flex",
+        boxShadow: "0px 0px 20px 0px rgba(0, 0, 0, 0.25)",
+        borderRadius: 6,
+        p: 1.5,
       }}
     >
       <Typography variant="h5">
@@ -34,7 +38,7 @@ export const Header = () => (
       <Typography variant="h5">
         <NavLink to="/about">About</NavLink>
       </Typography>
-    </Breadcrumbs>
+    </Stack>
 
     <Box sx={{ display: "flex", alignItems: "center" }}>
       <Typography variant="h5">

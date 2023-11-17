@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import {
   Button,
+  Container,
   FormControl,
   InputLabel,
   MenuItem,
@@ -9,18 +10,14 @@ import {
   TextField,
 } from "@mui/material";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
-import { SelectType, StudentSignUpForm } from "../types/sign-up";
-import { baseApi, endpoints } from "../api";
-import {
-  fullnameRegEx,
-  passwordRegEx,
-  usernameRegEx,
-  validationErrors,
-} from "../constants";
 import { useNavigate } from "react-router-dom";
 
+import { SelectType, StudentSignUpForm } from "../types/sign-up";
+import { baseApi, endpoints } from "../api";
+import { emailRegEx, fullnameRegEx, inputErrors } from "../constants";
+
 export const StudentSignUp = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [values, setValues] = useState<StudentSignUpForm>();
   const [genderArr, setGenderArr] = useState<SelectType[]>([]);
@@ -31,7 +28,7 @@ export const StudentSignUp = () => {
     formState: { errors },
   } = useForm<StudentSignUpForm>({
     defaultValues: {
-      username: "",
+      email: "",
       password: "",
       fullname: "",
       age: "",
@@ -56,12 +53,12 @@ export const StudentSignUp = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Stack spacing={3} maxWidth={600} margin="0 auto">
+      <Stack spacing={2}>
         <Controller
           control={control}
-          name="username"
+          name="email"
           rules={{
-            pattern: usernameRegEx,
+            pattern: emailRegEx,
           }}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <TextField
@@ -71,7 +68,7 @@ export const StudentSignUp = () => {
               label="Username"
               type="text"
               required
-              helperText={error ? validationErrors.usernameError : null}
+              helperText={error ? inputErrors.emailError : null}
             />
           )}
         />
@@ -79,7 +76,7 @@ export const StudentSignUp = () => {
           control={control}
           name="password"
           rules={{
-            pattern: passwordRegEx,
+            minLength: 4,
           }}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <TextField
@@ -89,7 +86,7 @@ export const StudentSignUp = () => {
               label="Password"
               type="password"
               required
-              helperText={error ? validationErrors.passwordPattern : null}
+              helperText={error ? inputErrors.passwordPattern : null}
             />
           )}
         />
@@ -106,7 +103,7 @@ export const StudentSignUp = () => {
               error={!!error}
               label="Fullname"
               type="text"
-              helperText={error ? validationErrors.fullnameError : null}
+              helperText={error ? inputErrors.fullnameError : null}
             />
           )}
         />
@@ -124,19 +121,14 @@ export const StudentSignUp = () => {
               error={!!error}
               label="Write your age"
               type="number"
-              helperText={error ? validationErrors.tooYoung : null}
+              helperText={error ? inputErrors.tooYoung : null}
             />
           )}
         />
-
         <Controller
           control={control}
           name="gender"
-          render={({
-            field: { onChange, value },
-            fieldState: { error },
-            formState,
-          }) => (
+          render={({ field: { onChange, value } }) => (
             <FormControl fullWidth>
               <InputLabel id="gender-select-label">Gender</InputLabel>
               <Select
@@ -155,7 +147,6 @@ export const StudentSignUp = () => {
             </FormControl>
           )}
         />
-
         <Button type="submit" variant="contained">
           Submit
         </Button>

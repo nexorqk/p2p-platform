@@ -10,9 +10,10 @@ import {
   TextField,
 } from "@mui/material";
 import { SubmitHandler, useForm } from "react-hook-form";
+
 import { baseApi, endpoints } from "../api";
 import { SelectType, TrainerSignUpForm } from "../types";
-import { passwordRegEx, usernameRegEx, validationErrors } from "../constants";
+import { emailRegEx, fullnameRegEx, inputErrors } from "../constants";
 import MultiSelectElement from "./MultiSelectElement";
 
 export const TrainerSignUp = () => {
@@ -24,6 +25,7 @@ export const TrainerSignUp = () => {
   const [specificValue, setSpecificValue] = useState([]);
 
   const {
+    reset,
     register,
     handleSubmit,
     control,
@@ -86,35 +88,35 @@ export const TrainerSignUp = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Stack direction={"column"} spacing={3} maxWidth={600} margin="0 auto">
+      <Stack direction="column" spacing={2}>
         <TextField
           required
-          error={!!errors.username}
-          label="Username"
-          type="text"
-          helperText={errors.username ? validationErrors.common : null}
-          {...register("username", { pattern: usernameRegEx })}
+          error={!!errors.email}
+          label="Email"
+          type="email"
+          helperText={errors.email ? inputErrors.common : null}
+          {...register("email", { pattern: emailRegEx })}
         />
         <TextField
           required
           error={!!errors.password}
           label="Password"
           type="password"
-          helperText={errors.password ? validationErrors.passwordPattern : null}
-          {...register("password", { pattern: passwordRegEx })}
+          helperText={errors.password ? inputErrors.passwordPattern : null}
+          {...register("password", { min: 4 })}
         />
         <TextField
           error={!!errors.fullname}
           label="Fullname"
           type="text"
-          helperText={errors.fullname ? validationErrors.common : null}
-          {...register("fullname", { pattern: usernameRegEx })}
+          helperText={errors.fullname ? inputErrors.common : null}
+          {...register("fullname", { pattern: fullnameRegEx })}
         />
         <TextField
           label="Write your age"
           type="number"
           error={!!errors.age}
-          helperText={errors.age ? validationErrors.tooYoung : null}
+          helperText={errors.age ? inputErrors.tooYoung : null}
           {...register("age", { min: 18, max: 99 })}
         />
         <FormControl fullWidth>
@@ -158,6 +160,9 @@ export const TrainerSignUp = () => {
         />
         <Button type="submit" variant="contained">
           Sign Up
+        </Button>
+        <Button onClick={() => reset()} variant="outlined">
+          Reset
         </Button>
       </Stack>
     </form>

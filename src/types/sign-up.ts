@@ -10,7 +10,7 @@ export type SelectType = {
 };
 
 export interface StudentSignUpForm {
-  username: string;
+  email: string;
   password: string;
   fullname: string;
   age: number | "";
@@ -18,7 +18,7 @@ export interface StudentSignUpForm {
 }
 
 export interface TrainerSignUpForm {
-  username: string;
+  email: string;
   password: string;
   fullname: string;
   age: number | undefined;
