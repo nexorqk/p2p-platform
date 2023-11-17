@@ -1,12 +1,11 @@
 a {
   text-decoration: none;
   color: inherit;
-  transition: color 0.3s ease;
   font-weight: 400;
 }
 
 a:hover {
-  color: rgba(0, 0, 0, 0.5);
+  text-decoration: underline;
 }
 
 .active {

@@ -1,3 +1,4 @@
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { Button, Stack, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import { passwordRegEx, usernameRegEx, validationErrors } from "../constants";
@@ -14,8 +15,8 @@ const defaultValues = {
   password: "",
 };
 
-const SignInPage = () => {
-  const [values, setValues] = useState<IFormProps>();
+export const SignInPage = () => {
+  const [values, setValues] = useState<IFormProps>(defaultValues);
   const { handleSubmit, reset, control, setValue } = useForm<IFormProps>({
     defaultValues: defaultValues,
   });
@@ -24,6 +25,19 @@ const SignInPage = () => {
     setValues(data);
     console.log(values);
   };
+
+  // const auth = getAuth();
+  // createUserWithEmailAndPassword(auth, values.email, values.password)
+  //   .then((userCredential) => {
+  //     // Signed up
+  //     const user = userCredential.user;
+  //     // ...
+  //   })
+  //   .catch((error) => {
+  //     const errorCode = error.code;
+  //     const errorMessage = error.message;
+  //     // ..
+  //   });
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -57,7 +71,6 @@ const SignInPage = () => {
           }}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <TextField
-              color="secondary"
               onChange={onChange}
               value={value}
               error={!!error}
@@ -68,15 +81,13 @@ const SignInPage = () => {
             />
           )}
         />
-        <Button type="submit" size="large" variant="contained" color="primary">
+        <Button type="submit" variant="contained">
           Sign In
         </Button>
-        <Button onClick={() => reset()} variant={"outlined"}>
+        <Button onClick={() => reset()} variant="outlined">
           Reset
         </Button>
       </Stack>
     </form>
   );
 };
-
-export default SignInPage;

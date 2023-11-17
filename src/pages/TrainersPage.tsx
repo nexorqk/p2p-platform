@@ -1,5 +1,6 @@
 import { Box, Stack } from "@mui/material";
-import TrainerCard from "../components/TrainerCard";
+
+import { TrainerCard } from "../components";
 
 const trainersArr = [
   {
@@ -14,7 +15,7 @@ const trainersArr = [
   },
 ];
 
-const TrainersPage = () => {
+export const TrainersPage = () => {
   return (
     <Stack direction="row" spacing={2}>
       {trainersArr.map((trainer) => (
@@ -23,5 +24,3 @@ const TrainersPage = () => {
     </Stack>
   );
 };
-
-export default TrainersPage;

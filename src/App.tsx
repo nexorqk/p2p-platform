@@ -1,10 +1,13 @@
 import { Route, Routes } from "react-router-dom";
-import WelcomePage from "./pages/WelcomePage";
-import SignUpPage from "./pages/SignUpPage";
-import NotFoundPage from "./pages/NotFoundPage";
-import SignInPage from "./pages/SignInPage";
-import MainLayout from "./components/MainLayout";
-import TrainersPage from "./pages/TrainersPage";
+
+import {
+  WelcomePage,
+  NotFoundPage,
+  SignInPage,
+  SignUpPage,
+  TrainersPage,
+} from "./pages";
+import { MainLayout } from "./components";
 
 function App() {
   return (

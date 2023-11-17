@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Box, Tab, Tabs, Typography } from "@mui/material";
-import TrainerSignUp from "../components/TrainerSignUp";
-import StudentSignUp from "../components/StudentSignUp";
 
-const SignUpPage = () => {
+import { StudentSignUp, TrainerSignUp } from "../components";
+
+export const SignUpPage = () => {
   const [value, setValue] = useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -25,5 +25,3 @@ const SignUpPage = () => {
     </>
   );
 };
-
-export default SignUpPage;

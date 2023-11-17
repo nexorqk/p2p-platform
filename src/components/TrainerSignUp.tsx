@@ -15,7 +15,7 @@ import { SelectType, TrainerSignUpForm } from "../types";
 import { passwordRegEx, usernameRegEx, validationErrors } from "../constants";
 import MultiSelectElement from "./MultiSelectElement";
 
-const TrainerSignUp = () => {
+export const TrainerSignUp = () => {
   const [specificSport, setSpecificSport] = useState<SelectType[]>([]);
   const [sport, setSport] = useState("");
   const [sportTypesArr, setSportTypesArr] = useState<SelectType[]>([]);
@@ -49,7 +49,7 @@ const TrainerSignUp = () => {
       console.error(error);
     }
   };
-  const gandleSportSelect = (event: SelectChangeEvent) => {
+  const handleSportSelect = (event: SelectChangeEvent) => {
     setSport(event.target.value as string);
   };
   const fetchSportTypesArr = async () => {
@@ -98,7 +98,6 @@ const TrainerSignUp = () => {
         <TextField
           required
           error={!!errors.password}
-          color="secondary"
           label="Password"
           type="password"
           helperText={errors.password ? validationErrors.passwordPattern : null}
@@ -114,7 +113,6 @@ const TrainerSignUp = () => {
         <TextField
           label="Write your age"
           type="number"
-          size="small"
           error={!!errors.age}
           helperText={errors.age ? validationErrors.tooYoung : null}
           {...register("age", { min: 18, max: 99 })}
@@ -142,7 +140,7 @@ const TrainerSignUp = () => {
             id="sport-select"
             value={sport}
             label="Sport"
-            onChange={gandleSportSelect}
+            onChange={handleSportSelect}
           >
             {sportTypesArr.map((sport) => (
               <MenuItem key={sport.id} value={sport.id}>
@@ -158,17 +156,10 @@ const TrainerSignUp = () => {
           control={control}
           required
         />
-        <Button
-          size="large"
-          type={"submit"}
-          variant={"contained"}
-          color={"primary"}
-        >
+        <Button type="submit" variant="contained">
           Sign Up
         </Button>
       </Stack>
     </form>
   );
 };
-
-export default TrainerSignUp;

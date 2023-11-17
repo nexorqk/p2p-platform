@@ -6,7 +6,7 @@ import {
   Typography,
 } from "@mui/material";
 
-const TrainerCard = ({
+export const TrainerCard = ({
   trainer,
 }: {
   trainer: { name: string; sport: string; specifics: string[] };
@@ -32,5 +32,3 @@ const TrainerCard = ({
     </Card>
   );
 };
-
-export default TrainerCard;

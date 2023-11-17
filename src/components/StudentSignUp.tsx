@@ -19,7 +19,7 @@ import {
 } from "../constants";
 import { useNavigate } from "react-router-dom";
 
-const StudentSignUp = () => {
+export const StudentSignUp = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [values, setValues] = useState<StudentSignUpForm>();
@@ -54,26 +54,6 @@ const StudentSignUp = () => {
     fetchGender();
   }, []);
 
-  const signUp = async () => {
-    try {
-      setIsLoading(true);
-      const response = await baseApi.post("sign-up", values, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      if (!response?.data?.token) {
-        console.log("Something went wrong during signing up: ", response);
-        return;
-      }
-      // navigate(APP_ROUTES.SIGN_IN);
-    } catch (err) {
-      console.log("Some error occured during signing up: ", err);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={3} maxWidth={600} margin="0 auto">
@@ -103,7 +83,6 @@ const StudentSignUp = () => {
           }}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <TextField
-              color="secondary"
               onChange={onChange}
               value={value}
               error={!!error}
@@ -177,7 +156,7 @@ const StudentSignUp = () => {
           )}
         />
 
-        <Button size="large" type="submit" variant="contained">
+        <Button type="submit" variant="contained">
           Submit
         </Button>
         <Button onClick={() => reset()} variant="outlined">
@@ -187,5 +166,3 @@ const StudentSignUp = () => {
     </form>
   );
 };
-
-export default StudentSignUp;
