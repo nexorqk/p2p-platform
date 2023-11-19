@@ -8,6 +8,7 @@ import {
   TextField,
 } from "@mui/material";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
 import { SelectType, StudentSignUpForm } from "../types/sign-up";
@@ -30,8 +31,22 @@ export const StudentSignUp = () => {
       gender: "",
     },
   });
-  const onSubmit: SubmitHandler<StudentSignUpForm> = (data) =>
+  const onSubmit: SubmitHandler<StudentSignUpForm> = (data) => {
     console.log(data);
+
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, data.email, data.password)
+      .then((userCredential) => {
+        // Signed up
+        const user = userCredential.user;
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
