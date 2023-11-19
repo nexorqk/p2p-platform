@@ -9,8 +9,7 @@
     "build": "tsc && vite build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
-    "preview": "vite preview",
-    "server": "json-server --watch db.json -p 3004"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@emotion/react": "latest",
@@ -29,7 +28,6 @@
     "@types/react-dom": "latest",
     "@vitejs/plugin-react": "latest",
     "gh-pages": "^6.0.0",
-    "json-server": "^0.17.4",
     "typescript": "latest",
     "vite": "latest"
   }
