@@ -1,14 +1,4 @@
 import { useEffect, useState } from "react";
-import {
-  Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-  Stack,
-  TextField,
-} from "@mui/material";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { baseApi, endpoints } from "../api";
@@ -40,7 +30,7 @@ export const TrainerSignUp = () => {
   const onSubmit: SubmitHandler<TrainerSignUpForm> = (data) =>
     console.log(data);
 
-  const handleGenderSelect = (event: SelectChangeEvent) => {
+  const handleGenderSelect = (event: any) => {
     setGender(event.target.value as string);
   };
   const fetchGender = async () => {
@@ -51,7 +41,7 @@ export const TrainerSignUp = () => {
       console.error(error);
     }
   };
-  const handleSportSelect = (event: SelectChangeEvent) => {
+  const handleSportSelect = (event: any) => {
     setSport(event.target.value as string);
   };
   const fetchSportTypesArr = async () => {
@@ -88,7 +78,7 @@ export const TrainerSignUp = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Stack direction="column" spacing={2}>
+      {/* <Stack direction="column" spacing={2}>
         <TextField
           required
           error={!!errors.email}
@@ -164,7 +154,7 @@ export const TrainerSignUp = () => {
         <Button onClick={() => reset()} variant="outlined">
           Reset
         </Button>
-      </Stack>
+      </Stack> */}
     </form>
   );
 };

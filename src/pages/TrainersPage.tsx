@@ -1,5 +1,3 @@
-import { Box, Stack } from "@mui/material";
-
 import { TrainerCard } from "../components";
 
 const trainersArr = [
@@ -17,10 +15,10 @@ const trainersArr = [
 
 export const TrainersPage = () => {
   return (
-    <Stack direction="row" spacing={2}>
+    <div className="flex flex-col justify-between">
       {trainersArr.map((trainer) => (
         <TrainerCard key={trainer.name} trainer={trainer} />
       ))}
-    </Stack>
+    </div>
   );
 };

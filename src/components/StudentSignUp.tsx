@@ -1,12 +1,3 @@
-import {
-  Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  Stack,
-  TextField,
-} from "@mui/material";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
@@ -50,7 +41,7 @@ export const StudentSignUp = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Stack spacing={2}>
+      {/* <Stack spacing={2}>
         <Controller
           control={control}
           name="email"
@@ -151,7 +142,7 @@ export const StudentSignUp = () => {
         <Button onClick={() => reset()} variant="outlined">
           Reset
         </Button>
-      </Stack>
+      </Stack> */}
     </form>
   );
 };

@@ -1,7 +1,5 @@
-import { Typography } from "@mui/material";
-
 export const WelcomePage = () => (
-  <Typography variant="h3" align="center">
+  <h2 className="text-center scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
     Welcome p2p platform for searching Music Trainer!
-  </Typography>
+  </h2>
 );
